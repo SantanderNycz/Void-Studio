@@ -7,7 +7,7 @@
 
 export const studio = {
   name: "VOID",
-  tagline: "We build what others leave empty.",
+  tagline: "Fill the void.",
   location: "Porto, Portugal",
   email: "santandernycz.ls@gmail.com",
   phone: "+351 915 619 867",
@@ -19,7 +19,7 @@ export const studio = {
 };
 
 export const hero = {
-  lines: ["Construímos o que", "os outros", "deixam vazio."],
+  lines: ["Where nothing", "becomes", "something."],
   accentLineIndex: 2, // which line gets the amber accent color
   cta: {
     label: "Ver Projetos",
