@@ -2,16 +2,16 @@ import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { projects } from '../content'
+import { useLanguage } from '../LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Cinematic gradients per project
 const GRADIENTS = [
-  'linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)',  // Casa Santé — warm earth
-  'linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)',  // Bikcraft — deep navy
-  'linear-gradient(160deg, #1e1208 0%, #0d0804 100%)',  // Dogs — dark brown
-  'linear-gradient(160deg, #0a1f14 0%, #060f0a 100%)',  // Licittare — forest
-  'linear-gradient(160deg, #2a1c00 0%, #110c00 100%)',  // Duck Shop — dark amber
+  'linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)',
+  'linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)',
+  'linear-gradient(160deg, #1e1208 0%, #0d0804 100%)',
+  'linear-gradient(160deg, #0a1f14 0%, #060f0a 100%)',
+  'linear-gradient(160deg, #2a1c00 0%, #110c00 100%)',
 ]
 
 const ACCENT_COLORS = ['#8B5E3C', '#2A4A7A', '#5C3D1E', '#1A5C38', '#8B6914']
@@ -21,11 +21,15 @@ function ProjectCard({
   index,
   gradient,
   accentColor,
+  description,
+  ctaLabel,
 }: {
   project: (typeof projects)[number]
   index: number
   gradient: string
   accentColor: string
+  description: string
+  ctaLabel: string
 }) {
   const cardRef = useRef<HTMLElement>(null)
   const imageRef = useRef<HTMLDivElement>(null)
@@ -44,50 +48,23 @@ function ProjectCard({
     }
 
     const ctx = gsap.context(() => {
-      // Card starts invisible + below
       gsap.set(cardRef.current, { opacity: 0, y: 80 })
       gsap.set(imageRef.current, { scale: 1.04 })
       gsap.set(numberRef.current, { opacity: 0, x: isEven ? -20 : 20 })
       gsap.set([nameRef.current, detailRef.current], { opacity: 0, y: 30 })
 
-      const tl = gsap.timeline({
+      gsap.timeline({
         scrollTrigger: {
           trigger: cardRef.current,
           start: 'top 82%',
           toggleActions: 'play none none none',
         },
       })
-
-      tl
-        .to(cardRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-        })
-        .to(imageRef.current, {
-          scale: 1,
-          duration: 1.2,
-          ease: 'power2.out',
-        }, 0)
-        .to(numberRef.current, {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        }, 0.15)
-        .to(nameRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: 'power3.out',
-        }, 0.2)
-        .to(detailRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        }, 0.35)
+        .to(cardRef.current, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' })
+        .to(imageRef.current, { scale: 1, duration: 1.2, ease: 'power2.out' }, 0)
+        .to(numberRef.current, { opacity: 1, x: 0, duration: 0.6, ease: 'power2.out' }, 0.15)
+        .to(nameRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.2)
+        .to(detailRef.current, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, 0.35)
     }, cardRef)
 
     return () => ctx.revert()
@@ -96,61 +73,42 @@ function ProjectCard({
   return (
     <article
       ref={cardRef}
-      style={{
-        opacity: 0,
-        borderTop: '1px solid #1c1c1c',
-        padding: 'clamp(3rem, 5vw, 5rem) 0',
-      }}
+      style={{ opacity: 0, borderTop: '1px solid #1c1c1c', padding: 'clamp(3rem, 5vw, 5rem) 0' }}
     >
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: isEven ? '1fr 1.1fr' : '1.1fr 1fr',
-          gap: 'clamp(2rem, 4vw, 5rem)',
-          alignItems: 'center',
-          flexDirection: isEven ? 'row' : 'row-reverse',
-        }}
-      >
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isEven ? '1fr 1.1fr' : '1.1fr 1fr',
+        gap: 'clamp(2rem, 4vw, 5rem)',
+        alignItems: 'center',
+      }}>
         {/* Info panel */}
-        <div
-          ref={infoRef}
-          style={{ order: isEven ? 1 : 2 }}
-        >
-          {/* Number */}
-          <span
-            ref={numberRef}
-            style={{
-              display: 'block',
-              fontFamily: '"Syne", sans-serif',
-              fontWeight: 500,
-              fontSize: '0.72rem',
-              letterSpacing: '0.16em',
-              color: '#c9a96e',
-              marginBottom: 'clamp(1.2rem, 2vw, 2rem)',
-              opacity: 0,
-            }}
-          >
+        <div ref={infoRef} style={{ order: isEven ? 1 : 2 }}>
+          <span ref={numberRef} style={{
+            display: 'block',
+            fontFamily: '"Syne", sans-serif',
+            fontWeight: 500,
+            fontSize: '0.72rem',
+            letterSpacing: '0.16em',
+            color: '#c9a96e',
+            marginBottom: 'clamp(1.2rem, 2vw, 2rem)',
+            opacity: 0,
+          }}>
             {project.id}
           </span>
 
-          {/* Project name */}
-          <h3
-            ref={nameRef}
-            style={{
-              fontFamily: '"Syne", sans-serif',
-              fontWeight: 800,
-              fontSize: 'clamp(2.4rem, 5.5vw, 6rem)',
-              lineHeight: 0.93,
-              letterSpacing: '-0.03em',
-              color: '#f5f0e8',
-              marginBottom: 'clamp(1.5rem, 2.5vw, 2.5rem)',
-              opacity: 0,
-            }}
-          >
+          <h3 ref={nameRef} style={{
+            fontFamily: '"Syne", sans-serif',
+            fontWeight: 800,
+            fontSize: 'clamp(2.4rem, 5.5vw, 6rem)',
+            lineHeight: 0.93,
+            letterSpacing: '-0.03em',
+            color: '#f5f0e8',
+            marginBottom: 'clamp(1.5rem, 2.5vw, 2.5rem)',
+            opacity: 0,
+          }}>
             {project.name}
           </h3>
 
-          {/* Details + CTA */}
           <div ref={detailRef} style={{ opacity: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: 'clamp(1.5rem, 2.5vw, 2.5rem)' }}>
               <span style={{
@@ -163,11 +121,7 @@ function ProjectCard({
                 {project.category}
               </span>
               <span style={{ width: '1px', height: '12px', background: '#2a2a2a' }} />
-              <span style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.72rem',
-                color: '#4a4a4a',
-              }}>
+              <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '0.72rem', color: '#4a4a4a' }}>
                 {project.year}
               </span>
             </div>
@@ -180,13 +134,14 @@ function ProjectCard({
               marginBottom: 'clamp(2rem, 3vw, 3rem)',
               maxWidth: '38ch',
             }}>
-              {project.description}
+              {description}
             </p>
 
             <a
               href={project.url ?? '#'}
               target="_blank"
               rel="noopener noreferrer"
+              className="project-link"
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -198,72 +153,41 @@ function ProjectCard({
                 textTransform: 'uppercase',
                 color: '#f5f0e8',
               }}
-              className="project-link"
             >
-              Ver Projecto
-              <span
-                className="project-link-line"
-                style={{
-                  display: 'block',
-                  height: '1px',
-                  width: '36px',
-                  background: '#c9a96e',
-                  transition: 'width 0.4s ease',
-                }}
-              />
+              {ctaLabel}
+              <span className="project-link-line" style={{
+                display: 'block',
+                height: '1px',
+                width: '36px',
+                background: '#c9a96e',
+                transition: 'width 0.4s ease',
+              }} />
             </a>
           </div>
         </div>
 
         {/* Image panel */}
-        <div
-          style={{
-            order: isEven ? 2 : 1,
-            overflow: 'hidden',
-            aspectRatio: '16/9',
+        <div style={{ order: isEven ? 2 : 1, overflow: 'hidden', aspectRatio: '16/9', position: 'relative' }}>
+          <div ref={imageRef} style={{
+            width: '100%',
+            height: '100%',
+            background: gradient,
+            transformOrigin: 'center center',
             position: 'relative',
-          }}
-        >
-          <div
-            ref={imageRef}
-            style={{
-              width: '100%',
-              height: '100%',
-              background: gradient,
-              transformOrigin: 'center center',
-              position: 'relative',
-            }}
-          >
-            {/* Real image or gradient fallback */}
-            {project.image ? (
+          }}>
+            {project.image && (
               <img
                 src={project.image}
                 alt={`${project.name} — preview`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
-            ) : null}
-
-            {/* Accent line at bottom */}
+            )}
             <div style={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              right: 0,
-              height: '2px',
-              background: accentColor,
-              opacity: 0.5,
+              position: 'absolute', bottom: 0, left: 0, right: 0,
+              height: '2px', background: accentColor, opacity: 0.5,
             }} />
-
-            {/* Category label */}
             <div style={{
-              position: 'absolute',
-              top: '1.25rem',
-              left: '1.25rem',
+              position: 'absolute', top: '1.25rem', left: '1.25rem',
               padding: '0.25rem 0.6rem',
               border: '1px solid rgba(245,240,232,0.1)',
               backdropFilter: 'blur(4px)',
@@ -288,26 +212,17 @@ function ProjectCard({
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   useLayoutEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (prefersReduced) {
-      gsap.set(headingRef.current, { opacity: 1, y: 0 })
-      return
-    }
+    if (prefersReduced) { gsap.set(headingRef.current, { opacity: 1, y: 0 }); return }
 
     const ctx = gsap.context(() => {
       gsap.set(headingRef.current, { opacity: 0, y: 40 })
       gsap.to(headingRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
+        opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', toggleActions: 'play none none none' },
       })
     }, sectionRef)
 
@@ -315,25 +230,17 @@ export default function Projects() {
   }, [])
 
   return (
-    <section
-      ref={sectionRef}
-      id="projetos"
-      style={{
-        backgroundColor: '#0a0a0a',
-        padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5.5rem)',
-      }}
-    >
-      {/* Section header */}
-      <div
-        ref={headingRef}
-        style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between',
-          marginBottom: 'clamp(3rem, 5vw, 5rem)',
-          opacity: 0,
-        }}
-      >
+    <section ref={sectionRef} id="projetos" style={{
+      backgroundColor: '#0a0a0a',
+      padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5.5rem)',
+    }}>
+      <div ref={headingRef} style={{
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'space-between',
+        marginBottom: 'clamp(3rem, 5vw, 5rem)',
+        opacity: 0,
+      }}>
         <span style={{
           fontFamily: '"Syne", sans-serif',
           fontWeight: 800,
@@ -341,7 +248,7 @@ export default function Projects() {
           letterSpacing: '-0.03em',
           color: '#f5f0e8',
         }}>
-          Projetos
+          {t.projects.heading}
         </span>
         <span style={{
           fontFamily: '"Inter", sans-serif',
@@ -350,11 +257,10 @@ export default function Projects() {
           textTransform: 'uppercase',
           color: '#4a4a4a',
         }}>
-          ({projects.length.toString().padStart(2, '0')}) Trabalho selecionado
+          ({projects.length.toString().padStart(2, '0')}) {t.projects.label}
         </span>
       </div>
 
-      {/* Project cards — stacked queue */}
       <div>
         {projects.map((project, i) => (
           <ProjectCard
@@ -363,14 +269,13 @@ export default function Projects() {
             index={i}
             gradient={GRADIENTS[i] ?? GRADIENTS[0]}
             accentColor={ACCENT_COLORS[i] ?? ACCENT_COLORS[0]}
+            description={t.projects.items[i]?.description ?? project.description}
+            ctaLabel={t.projects.cta}
           />
         ))}
       </div>
+
+      <style>{`.project-link:hover .project-link-line { width: 56px !important; }`}</style>
     </section>
   )
 }
-
-// Project link hover
-const style = document.createElement('style')
-style.textContent = `.project-link:hover .project-link-line { width: 56px !important; }`
-document.head.appendChild(style)

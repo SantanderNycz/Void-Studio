@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { hero } from '../content'
+import { useLanguage } from '../LanguageContext'
 
 interface Props {
   animate: boolean
@@ -13,6 +13,7 @@ export default function Hero({ animate }: Props) {
   const line2Ref = useRef<HTMLSpanElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const metaRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   useLayoutEffect(() => {
     if (!animate) return
@@ -26,7 +27,6 @@ export default function Hero({ animate }: Props) {
     }
 
     const ctx = gsap.context(() => {
-      // Start invisible + shifted — no overflow clipping needed
       gsap.set(lines, { opacity: 0, y: 70 })
       gsap.set(ctaRef.current, { opacity: 0, y: 24 })
       gsap.set(metaRef.current, { opacity: 0 })
@@ -56,6 +56,7 @@ export default function Hero({ animate }: Props) {
   }, [animate])
 
   const lineRefs = [line0Ref, line1Ref, line2Ref]
+  const lines = t.hero.lines
 
   return (
     <section
@@ -87,7 +88,7 @@ export default function Hero({ animate }: Props) {
         }}
       />
 
-      {/* Tagline — micro label */}
+      {/* Location tag */}
       <div
         ref={metaRef}
         style={{
@@ -113,13 +114,13 @@ export default function Hero({ animate }: Props) {
           letterSpacing: '0.2em',
           textTransform: 'uppercase',
         }}>
-          Porto, Portugal — Estúdio Digital
+          {t.misc.locationLabel}
         </span>
       </div>
 
       {/* Headline */}
-      <h1 aria-label={hero.lines.join(' ')}>
-        {hero.lines.map((line, i) => (
+      <h1 aria-label={lines.join(' ')}>
+        {lines.map((line, i) => (
           <span
             key={i}
             ref={lineRefs[i]}
@@ -130,7 +131,7 @@ export default function Hero({ animate }: Props) {
               lineHeight: 0.92,
               letterSpacing: '-0.03em',
               fontSize: 'clamp(3.5rem, 9vw, 9.5rem)',
-              color: i === hero.accentLineIndex ? '#c9a96e' : '#f5f0e8',
+              color: i === t.hero.accentLineIndex ? '#c9a96e' : '#f5f0e8',
               opacity: 0,
             }}
           >
@@ -145,7 +146,7 @@ export default function Hero({ animate }: Props) {
         style={{ marginTop: 'clamp(3rem, 5vw, 5rem)', opacity: 0 }}
       >
         <a
-          href={hero.cta.href}
+          href="#projetos"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -159,7 +160,7 @@ export default function Hero({ animate }: Props) {
           }}
           className="hero-cta-link"
         >
-          {hero.cta.label}
+          {t.hero.cta}
           <span
             className="hero-cta-line"
             style={{
@@ -192,12 +193,12 @@ export default function Hero({ animate }: Props) {
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
         }}>
-          Scroll
+          {t.misc.scrollHint}
         </span>
         <span style={{ display: 'block', width: '2rem', height: '1px', background: '#1c1c1c' }} />
       </div>
 
-      {/* Year marker */}
+      {/* Year */}
       <div
         style={{
           position: 'absolute',
@@ -215,13 +216,8 @@ export default function Hero({ animate }: Props) {
           © {new Date().getFullYear()}
         </span>
       </div>
+
+      <style>{`.hero-cta-link:hover .hero-cta-line { width: 72px !important; }`}</style>
     </section>
   )
 }
-
-// Hover style via a <style> tag to avoid inline limitations
-const style = document.createElement('style')
-style.textContent = `
-  .hero-cta-link:hover .hero-cta-line { width: 72px !important; }
-`
-document.head.appendChild(style)

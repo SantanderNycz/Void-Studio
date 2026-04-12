@@ -1,7 +1,8 @@
 import { useLayoutEffect, useRef, useState, type FormEvent } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { studio, nav } from '../content'
+import { studio } from '../content'
+import { useLanguage } from '../LanguageContext'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,6 +13,14 @@ export default function Footer() {
   const infoRef = useRef<HTMLDivElement>(null)
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const { t, lang } = useLanguage()
+
+  const navLinks = [
+    { label: t.nav.projects, href: '#projetos' },
+    { label: t.nav.services, href: '#servicos' },
+    { label: t.nav.studio,   href: '#estudio'  },
+    { label: t.nav.contact,  href: '#contacto' },
+  ]
 
   useLayoutEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -24,24 +33,11 @@ export default function Footer() {
       gsap.set([headingRef.current, formRef.current, infoRef.current], { opacity: 0, y: 40 })
 
       gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
+        scrollTrigger: { trigger: sectionRef.current, start: 'top 80%', toggleActions: 'play none none none' },
       })
-      .to(headingRef.current, {
-        opacity: 1, y: 0,
-        duration: 0.8, ease: 'power3.out',
-      })
-      .to(formRef.current, {
-        opacity: 1, y: 0,
-        duration: 0.7, ease: 'power2.out',
-      }, '-=0.4')
-      .to(infoRef.current, {
-        opacity: 1, y: 0,
-        duration: 0.7, ease: 'power2.out',
-      }, '-=0.5')
+        .to(headingRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' })
+        .to(formRef.current, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+        .to(infoRef.current, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' }, '-=0.5')
     }, sectionRef)
 
     return () => ctx.revert()
@@ -50,7 +46,6 @@ export default function Footer() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmitting(true)
-    // Replace with Formspree, EmailJS, or custom endpoint
     await new Promise((r) => setTimeout(r, 900))
     setSubmitting(false)
     setSent(true)
@@ -71,31 +66,18 @@ export default function Footer() {
   }
 
   return (
-    <footer
-      ref={sectionRef}
-      id="contacto"
-      style={{
-        backgroundColor: '#0a0a0a',
-        borderTop: '1px solid #1c1c1c',
-      }}
-    >
-      {/* Contact area */}
-      <div style={{
-        padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5.5rem) clamp(3rem, 5vw, 5rem)',
-      }}>
+    <footer ref={sectionRef} id="contacto" style={{ backgroundColor: '#0a0a0a', borderTop: '1px solid #1c1c1c' }}>
+      <div style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5.5rem) clamp(3rem, 5vw, 5rem)' }}>
         {/* Heading */}
-        <div
-          ref={headingRef}
-          style={{
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-            marginBottom: 'clamp(3rem, 5vw, 5rem)',
-            paddingBottom: 'clamp(1.5rem, 2.5vw, 2rem)',
-            borderBottom: '1px solid #1c1c1c',
-            opacity: 0,
-          }}
-        >
+        <div ref={headingRef} style={{
+          display: 'flex',
+          alignItems: 'flex-end',
+          justifyContent: 'space-between',
+          marginBottom: 'clamp(3rem, 5vw, 5rem)',
+          paddingBottom: 'clamp(1.5rem, 2.5vw, 2rem)',
+          borderBottom: '1px solid #1c1c1c',
+          opacity: 0,
+        }}>
           <span style={{
             fontFamily: '"Syne", sans-serif',
             fontWeight: 800,
@@ -103,7 +85,7 @@ export default function Footer() {
             letterSpacing: '-0.03em',
             color: '#f5f0e8',
           }}>
-            Falar Connosco
+            {t.footer.heading}
           </span>
           <span style={{
             fontFamily: '"Inter", sans-serif',
@@ -124,36 +106,10 @@ export default function Footer() {
         }}>
           {/* Form */}
           {!sent ? (
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              style={{ opacity: 0 }}
-              aria-label="Formulário de contacto"
-            >
-              <input
-                type="text"
-                name="name"
-                placeholder="Nome"
-                required
-                style={inputStyle}
-                className="footer-input"
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                required
-                style={inputStyle}
-                className="footer-input"
-              />
-              <textarea
-                name="message"
-                placeholder="Mensagem"
-                rows={4}
-                required
-                style={{ ...inputStyle, resize: 'none' }}
-                className="footer-input"
-              />
+            <form ref={formRef} onSubmit={handleSubmit} style={{ opacity: 0 }} aria-label={lang === 'pt' ? 'Formulário de contacto' : 'Contact form'}>
+              <input type="text" name="name" placeholder={t.footer.namePlaceholder} required style={inputStyle} className="footer-input" />
+              <input type="email" name="email" placeholder={t.footer.emailPlaceholder} required style={inputStyle} className="footer-input" />
+              <textarea name="message" placeholder={t.footer.messagePlaceholder} rows={4} required style={{ ...inputStyle, resize: 'none' }} className="footer-input" />
               <div style={{ marginTop: '2rem' }}>
                 <button
                   type="submit"
@@ -176,17 +132,11 @@ export default function Footer() {
                     transition: 'color 0.3s ease',
                   }}
                 >
-                  {submitting ? 'A enviar…' : 'Enviar Mensagem'}
-                  <span
-                    className="footer-submit-line"
-                    style={{
-                      display: 'block',
-                      height: '1px',
-                      width: '40px',
-                      background: '#c9a96e',
-                      transition: 'width 0.4s ease',
-                    }}
-                  />
+                  {submitting ? t.footer.submitting : t.footer.submit}
+                  <span className="footer-submit-line" style={{
+                    display: 'block', height: '1px', width: '40px',
+                    background: '#c9a96e', transition: 'width 0.4s ease',
+                  }} />
                 </button>
               </div>
             </form>
@@ -199,14 +149,10 @@ export default function Footer() {
                 color: '#f5f0e8',
                 marginBottom: '0.75rem',
               }}>
-                Mensagem recebida.
+                {t.footer.successTitle}
               </p>
-              <p style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.9rem',
-                color: '#6b6b6b',
-              }}>
-                Entraremos em contacto em breve.
+              <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '0.9rem', color: '#6b6b6b' }}>
+                {t.footer.successSub}
               </p>
             </div>
           )}
@@ -216,39 +162,22 @@ export default function Footer() {
             <div>
               <p style={{
                 fontFamily: '"Inter", sans-serif',
-                fontSize: '0.68rem',
-                letterSpacing: '0.16em',
-                textTransform: 'uppercase',
-                color: '#4a4a4a',
-                marginBottom: '0.9rem',
+                fontSize: '0.68rem', letterSpacing: '0.16em', textTransform: 'uppercase',
+                color: '#4a4a4a', marginBottom: '0.9rem',
               }}>
-                Contacto Directo
+                {t.footer.contactLabel}
               </p>
-              <a
-                href={`mailto:${studio.email}`}
-                className="footer-email-link"
-                style={{
-                  fontFamily: '"Syne", sans-serif',
-                  fontWeight: 600,
-                  fontSize: 'clamp(0.95rem, 1.6vw, 1.3rem)',
-                  color: '#f5f0e8',
-                  transition: 'color 0.3s ease',
-                  display: 'block',
-                  marginBottom: '0.5rem',
-                }}
-              >
+              <a href={`mailto:${studio.email}`} className="footer-email-link" style={{
+                fontFamily: '"Syne", sans-serif', fontWeight: 600,
+                fontSize: 'clamp(0.95rem, 1.6vw, 1.3rem)', color: '#f5f0e8',
+                transition: 'color 0.3s ease', display: 'block', marginBottom: '0.5rem',
+              }}>
                 {studio.email}
               </a>
-              <a
-                href={`tel:${studio.phone.replace(/\s/g, '')}`}
-                style={{
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: '0.85rem',
-                  color: '#6b6b6b',
-                  transition: 'color 0.3s ease',
-                }}
-                className="footer-phone-link"
-              >
+              <a href={`tel:${studio.phone.replace(/\s/g, '')}`} className="footer-phone-link" style={{
+                fontFamily: '"Inter", sans-serif', fontSize: '0.85rem',
+                color: '#6b6b6b', transition: 'color 0.3s ease',
+              }}>
                 {studio.phone}
               </a>
             </div>
@@ -256,31 +185,20 @@ export default function Footer() {
             <div>
               <p style={{
                 fontFamily: '"Inter", sans-serif',
-                fontSize: '0.68rem',
-                letterSpacing: '0.16em',
-                textTransform: 'uppercase',
-                color: '#4a4a4a',
-                marginBottom: '0.9rem',
+                fontSize: '0.68rem', letterSpacing: '0.16em', textTransform: 'uppercase',
+                color: '#4a4a4a', marginBottom: '0.9rem',
               }}>
-                Social
+                {t.footer.socialLabel}
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
                 {Object.entries(studio.social).map(([platform, url]) => (
-                  <a
-                    key={platform}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <a key={platform} href={url} target="_blank" rel="noopener noreferrer"
                     className="footer-social-link"
                     style={{
-                      fontFamily: '"Inter", sans-serif',
-                      fontSize: '0.85rem',
-                      color: '#6b6b6b',
-                      textTransform: 'capitalize',
-                      transition: 'color 0.3s ease',
-                      width: 'fit-content',
-                    }}
-                  >
+                      fontFamily: '"Inter", sans-serif', fontSize: '0.85rem',
+                      color: '#6b6b6b', textTransform: 'capitalize',
+                      transition: 'color 0.3s ease', width: 'fit-content',
+                    }}>
                     {platform}
                   </a>
                 ))}
@@ -300,30 +218,20 @@ export default function Footer() {
         gap: '1.5rem',
       }}>
         <span style={{
-          fontFamily: '"Syne", sans-serif',
-          fontWeight: 800,
-          fontSize: '1rem',
-          letterSpacing: '-0.04em',
-          color: '#f5f0e8',
+          fontFamily: '"Syne", sans-serif', fontWeight: 800,
+          fontSize: '1rem', letterSpacing: '-0.04em', color: '#f5f0e8',
         }}>
           {studio.name}
         </span>
 
-        <nav aria-label="Rodapé">
+        <nav aria-label={lang === 'pt' ? 'Rodapé' : 'Footer'}>
           <ul role="list" style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
-            {nav.map((item) => (
+            {navLinks.map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                  className="footer-nav-link"
-                  style={{
-                    fontFamily: '"Inter", sans-serif',
-                    fontSize: '0.75rem',
-                    color: '#4a4a4a',
-                    letterSpacing: '0.04em',
-                    transition: 'color 0.3s ease',
-                  }}
-                >
+                <a href={item.href} className="footer-nav-link" style={{
+                  fontFamily: '"Inter", sans-serif', fontSize: '0.75rem',
+                  color: '#4a4a4a', letterSpacing: '0.04em', transition: 'color 0.3s ease',
+                }}>
                   {item.label}
                 </a>
               </li>
@@ -332,10 +240,8 @@ export default function Footer() {
         </nav>
 
         <span style={{
-          fontFamily: '"Inter", sans-serif',
-          fontSize: '0.72rem',
-          color: '#4a4a4a',
-          letterSpacing: '0.04em',
+          fontFamily: '"Inter", sans-serif', fontSize: '0.72rem',
+          color: '#4a4a4a', letterSpacing: '0.04em',
         }}>
           © {new Date().getFullYear()} {studio.name}
         </span>

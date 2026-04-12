@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
-import { studio, nav } from '../content'
+import { studio } from '../content'
+import { useLanguage } from '../LanguageContext'
 
 interface Props {
   visible: boolean
@@ -9,6 +10,7 @@ interface Props {
 export default function Navbar({ visible }: Props) {
   const navRef = useRef<HTMLElement>(null)
   const [scrolled, setScrolled] = useState(false)
+  const { lang, t, toggle } = useLanguage()
 
   useEffect(() => {
     if (!visible) return
@@ -24,6 +26,13 @@ export default function Navbar({ visible }: Props) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  const navLinks = [
+    { label: t.nav.projects, href: '#projetos' },
+    { label: t.nav.services, href: '#servicos' },
+    { label: t.nav.studio,   href: '#estudio'  },
+    { label: t.nav.contact,  href: '#contacto' },
+  ]
 
   return (
     <nav
@@ -45,6 +54,7 @@ export default function Navbar({ visible }: Props) {
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
       }}
     >
+      {/* Logo */}
       <a
         href="#"
         aria-label={`${studio.name} — página inicial`}
@@ -59,6 +69,7 @@ export default function Navbar({ visible }: Props) {
         {studio.name}
       </a>
 
+      {/* Nav links */}
       <ul
         role="list"
         style={{
@@ -68,7 +79,7 @@ export default function Navbar({ visible }: Props) {
           listStyle: 'none',
         }}
       >
-        {nav.map((item) => (
+        {navLinks.map((item) => (
           <li key={item.href}>
             <a
               href={item.href}
@@ -86,6 +97,47 @@ export default function Navbar({ visible }: Props) {
           </li>
         ))}
       </ul>
+
+      {/* Language toggle */}
+      <button
+        onClick={toggle}
+        aria-label={lang === 'pt' ? 'Switch to English' : 'Mudar para Português'}
+        style={{
+          background: 'none',
+          border: 'none',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.4rem',
+          padding: 0,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: '"Syne", sans-serif',
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.1em',
+            color: lang === 'pt' ? '#f5f0e8' : '#4a4a4a',
+            transition: 'color 0.3s ease',
+          }}
+        >
+          PT
+        </span>
+        <span style={{ color: '#2a2a2a', fontSize: '0.65rem' }}>/</span>
+        <span
+          style={{
+            fontFamily: '"Syne", sans-serif',
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.1em',
+            color: lang === 'en' ? '#f5f0e8' : '#4a4a4a',
+            transition: 'color 0.3s ease',
+          }}
+        >
+          EN
+        </span>
+      </button>
 
       <style>{`.nav-link:hover { color: #f5f0e8 !important; }`}</style>
     </nav>
