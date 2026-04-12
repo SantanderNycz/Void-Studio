@@ -110,22 +110,6 @@ function ProjectCard({
           </h3>
 
           <div ref={detailRef} style={{ opacity: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: 'clamp(1.5rem, 2.5vw, 2.5rem)' }}>
-              <span style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.72rem',
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: '#6b6b6b',
-              }}>
-                {project.category}
-              </span>
-              <span style={{ width: '1px', height: '12px', background: '#2a2a2a' }} />
-              <span style={{ fontFamily: '"Inter", sans-serif', fontSize: '0.72rem', color: '#4a4a4a' }}>
-                {project.year}
-              </span>
-            </div>
-
             <p style={{
               fontFamily: '"Inter", sans-serif',
               fontSize: 'clamp(0.85rem, 1.1vw, 0.95rem)',
@@ -167,40 +151,48 @@ function ProjectCard({
         </div>
 
         {/* Image panel */}
-        <div style={{ order: isEven ? 2 : 1, overflow: 'hidden', aspectRatio: '16/9', position: 'relative' }}>
-          <div ref={imageRef} style={{
-            width: '100%',
-            height: '100%',
-            background: gradient,
-            transformOrigin: 'center center',
-            position: 'relative',
-          }}>
-            {project.image && (
-              <img
-                src={project.image}
-                alt={`${project.name} — preview`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            )}
-            <div style={{
-              position: 'absolute', bottom: 0, left: 0, right: 0,
-              height: '2px', background: accentColor, opacity: 0.5,
-            }} />
-            <div style={{
-              position: 'absolute', top: '1.25rem', left: '1.25rem',
-              padding: '0.25rem 0.6rem',
-              border: '1px solid rgba(245,240,232,0.1)',
-              backdropFilter: 'blur(4px)',
+        <div style={{ order: isEven ? 2 : 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+          {/* Category tag — above the image, same row as number */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <span style={{
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '0.68rem',
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: '#6b6b6b',
             }}>
-              <span style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: '0.62rem',
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: 'rgba(245,240,232,0.45)',
-              }}>
-                {project.category}
-              </span>
+              {project.category}
+            </span>
+            <span style={{ width: '1px', height: '10px', background: '#2a2a2a', flexShrink: 0 }} />
+            <span style={{
+              fontFamily: '"Inter", sans-serif',
+              fontSize: '0.68rem',
+              color: '#4a4a4a',
+            }}>
+              {project.year}
+            </span>
+          </div>
+
+          {/* Image */}
+          <div style={{ overflow: 'hidden', aspectRatio: '16/9', position: 'relative' }}>
+            <div ref={imageRef} style={{
+              width: '100%',
+              height: '100%',
+              background: gradient,
+              transformOrigin: 'center center',
+              position: 'relative',
+            }}>
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={`${project.name} — preview`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
+              )}
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0,
+                height: '2px', background: accentColor, opacity: 0.5,
+              }} />
             </div>
           </div>
         </div>

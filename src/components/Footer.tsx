@@ -70,32 +70,31 @@ export default function Footer() {
       <div style={{ padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5.5rem) clamp(3rem, 5vw, 5rem)' }}>
         {/* Heading */}
         <div ref={headingRef} style={{
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'space-between',
           marginBottom: 'clamp(3rem, 5vw, 5rem)',
           paddingBottom: 'clamp(1.5rem, 2.5vw, 2rem)',
           borderBottom: '1px solid #1c1c1c',
           opacity: 0,
         }}>
           <span style={{
+            display: 'block',
             fontFamily: '"Syne", sans-serif',
             fontWeight: 800,
             fontSize: 'clamp(1.6rem, 3vw, 3rem)',
             letterSpacing: '-0.03em',
             color: '#f5f0e8',
+            marginBottom: '0.6rem',
           }}>
             {t.footer.heading}
           </span>
-          <span style={{
+          <a href={`mailto:${studio.email}`} style={{
             fontFamily: '"Inter", sans-serif',
-            fontSize: '0.7rem',
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: '#4a4a4a',
-          }}>
+            fontSize: '0.78rem',
+            letterSpacing: '0.04em',
+            color: '#6b6b6b',
+            transition: 'color 0.3s ease',
+          }} className="footer-email-link">
             {studio.email}
-          </span>
+          </a>
         </div>
 
         {/* Form + info */}
@@ -209,42 +208,50 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div style={{
+      <div className="footer-bottom" style={{
         padding: '1.5rem clamp(1.5rem, 5vw, 5.5rem)',
         borderTop: '1px solid #1c1c1c',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '1.5rem',
       }}>
-        <span style={{
-          fontFamily: '"Syne", sans-serif', fontWeight: 800,
-          fontSize: '1rem', letterSpacing: '-0.04em', color: '#f5f0e8',
+        <div className="footer-bottom-top" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1.5rem',
         }}>
-          {studio.name}
-        </span>
+          <span style={{
+            fontFamily: '"Syne", sans-serif', fontWeight: 800,
+            fontSize: '1rem', letterSpacing: '-0.04em', color: '#f5f0e8',
+          }}>
+            {studio.name}
+          </span>
 
-        <nav aria-label={lang === 'pt' ? 'Rodapé' : 'Footer'}>
-          <ul role="list" style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
-            {navLinks.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className="footer-nav-link" style={{
-                  fontFamily: '"Inter", sans-serif', fontSize: '0.75rem',
-                  color: '#4a4a4a', letterSpacing: '0.04em', transition: 'color 0.3s ease',
-                }}>
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav aria-label={lang === 'pt' ? 'Rodapé' : 'Footer'}>
+            <ul role="list" style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
+              {navLinks.map((item) => (
+                <li key={item.href}>
+                  <a href={item.href} className="footer-nav-link" style={{
+                    fontFamily: '"Inter", sans-serif', fontSize: '0.75rem',
+                    color: '#4a4a4a', letterSpacing: '0.04em', transition: 'color 0.3s ease',
+                  }}>
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
 
-        <span style={{
-          fontFamily: '"Inter", sans-serif', fontSize: '0.72rem',
-          color: '#4a4a4a', letterSpacing: '0.04em',
+        <div className="footer-copyright" style={{
+          marginTop: '1.25rem',
+          textAlign: 'center',
         }}>
-          © {new Date().getFullYear()} {studio.name}
-        </span>
+          <span style={{
+            fontFamily: '"Inter", sans-serif', fontSize: '0.72rem',
+            color: '#4a4a4a', letterSpacing: '0.04em',
+          }}>
+            © {new Date().getFullYear()} {studio.name}
+          </span>
+        </div>
       </div>
 
       <style>{`
@@ -254,6 +261,15 @@ export default function Footer() {
         .footer-phone-link:hover,
         .footer-social-link:hover,
         .footer-nav-link:hover { color: #f5f0e8 !important; }
+
+        @media (max-width: 767px) {
+          .footer-bottom-top { flex-wrap: wrap; gap: 1rem; }
+          .footer-copyright { margin-top: 1rem; }
+        }
+
+        @media (min-width: 768px) {
+          .footer-copyright { margin-top: 0.75rem; }
+        }
       `}</style>
     </footer>
   )
