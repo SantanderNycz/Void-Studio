@@ -92,6 +92,7 @@ export const translations = {
       submitting: "A enviar…",
       successTitle: "Mensagem recebida.",
       successSub: "Entraremos em contacto em breve.",
+      errorMsg: "Ocorreu um erro. Tente novamente ou envie um email directamente.",
     },
 
     // Misc
@@ -179,6 +180,7 @@ export const translations = {
       submitting: "Sending…",
       successTitle: "Message received.",
       successSub: "We'll be in touch soon.",
+      errorMsg: "Something went wrong. Please try again or email us directly.",
     },
 
     misc: {

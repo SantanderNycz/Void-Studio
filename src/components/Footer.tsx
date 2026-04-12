@@ -1,8 +1,19 @@
 import { useLayoutEffect, useRef, useState, type FormEvent } from 'react'
+import emailjs from '@emailjs/browser'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { studio } from '../content'
 import { useLanguage } from '../LanguageContext'
+
+// ─── EmailJS config ────────────────────────────────────────────────────────────
+// 1. Create a free account at https://www.emailjs.com
+// 2. Add a Gmail service → copy the Service ID below
+// 3. Create an email template with variables {{from_name}}, {{from_email}}, {{message}}
+//    and set "To Email" to santandernycz.ls@gmail.com → copy the Template ID below
+// 4. Go to Account → API Keys → copy your Public Key below
+const EMAILJS_SERVICE_ID  = 'service_2gf65lu'
+const EMAILJS_TEMPLATE_ID = 'template_i5f1rdw'
+const EMAILJS_PUBLIC_KEY  = 'hAFi5KXmkRyHiSmcZ'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,6 +24,7 @@ export default function Footer() {
   const infoRef = useRef<HTMLDivElement>(null)
   const [sent, setSent] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState(false)
   const { t, lang } = useLanguage()
 
   const navLinks = [
@@ -46,9 +58,20 @@ export default function Footer() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setSubmitting(true)
-    await new Promise((r) => setTimeout(r, 900))
-    setSubmitting(false)
-    setSent(true)
+    setError(false)
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current!,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      )
+      setSent(true)
+    } catch {
+      setError(true)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputStyle: React.CSSProperties = {
@@ -137,6 +160,16 @@ export default function Footer() {
                     background: '#c9a96e', transition: 'width 0.4s ease',
                   }} />
                 </button>
+                {error && (
+                  <p style={{
+                    marginTop: '1rem',
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '0.8rem',
+                    color: '#c0392b',
+                  }}>
+                    {t.footer.errorMsg}
+                  </p>
+                )}
               </div>
             </form>
           ) : (
