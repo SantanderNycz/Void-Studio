@@ -1,0 +1,354 @@
+import { useLayoutEffect, useRef, useState, type FormEvent } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { studio, nav } from '../content'
+
+gsap.registerPlugin(ScrollTrigger)
+
+export default function Footer() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+  const infoRef = useRef<HTMLDivElement>(null)
+  const [sent, setSent] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+
+  useLayoutEffect(() => {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) {
+      gsap.set([headingRef.current, formRef.current, infoRef.current], { opacity: 1, y: 0 })
+      return
+    }
+
+    const ctx = gsap.context(() => {
+      gsap.set([headingRef.current, formRef.current, infoRef.current], { opacity: 0, y: 40 })
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      })
+      .to(headingRef.current, {
+        opacity: 1, y: 0,
+        duration: 0.8, ease: 'power3.out',
+      })
+      .to(formRef.current, {
+        opacity: 1, y: 0,
+        duration: 0.7, ease: 'power2.out',
+      }, '-=0.4')
+      .to(infoRef.current, {
+        opacity: 1, y: 0,
+        duration: 0.7, ease: 'power2.out',
+      }, '-=0.5')
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSubmitting(true)
+    // Replace with Formspree, EmailJS, or custom endpoint
+    await new Promise((r) => setTimeout(r, 900))
+    setSubmitting(false)
+    setSent(true)
+  }
+
+  const inputStyle: React.CSSProperties = {
+    display: 'block',
+    width: '100%',
+    fontFamily: '"Inter", sans-serif',
+    fontSize: '0.9rem',
+    color: '#f5f0e8',
+    background: 'transparent',
+    border: 'none',
+    borderBottom: '1px solid #1c1c1c',
+    padding: '1.1rem 0',
+    outline: 'none',
+    transition: 'border-color 0.3s ease',
+  }
+
+  return (
+    <footer
+      ref={sectionRef}
+      id="contacto"
+      style={{
+        backgroundColor: '#0a0a0a',
+        borderTop: '1px solid #1c1c1c',
+      }}
+    >
+      {/* Contact area */}
+      <div style={{
+        padding: 'clamp(4rem, 8vw, 8rem) clamp(1.5rem, 5vw, 5.5rem) clamp(3rem, 5vw, 5rem)',
+      }}>
+        {/* Heading */}
+        <div
+          ref={headingRef}
+          style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            marginBottom: 'clamp(3rem, 5vw, 5rem)',
+            paddingBottom: 'clamp(1.5rem, 2.5vw, 2rem)',
+            borderBottom: '1px solid #1c1c1c',
+            opacity: 0,
+          }}
+        >
+          <span style={{
+            fontFamily: '"Syne", sans-serif',
+            fontWeight: 800,
+            fontSize: 'clamp(1.6rem, 3vw, 3rem)',
+            letterSpacing: '-0.03em',
+            color: '#f5f0e8',
+          }}>
+            Falar Connosco
+          </span>
+          <span style={{
+            fontFamily: '"Inter", sans-serif',
+            fontSize: '0.7rem',
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: '#4a4a4a',
+          }}>
+            {studio.email}
+          </span>
+        </div>
+
+        {/* Form + info */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
+          gap: 'clamp(3rem, 6vw, 6rem)',
+        }}>
+          {/* Form */}
+          {!sent ? (
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              style={{ opacity: 0 }}
+              aria-label="Formulário de contacto"
+            >
+              <input
+                type="text"
+                name="name"
+                placeholder="Nome"
+                required
+                style={inputStyle}
+                className="footer-input"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+                style={inputStyle}
+                className="footer-input"
+              />
+              <textarea
+                name="message"
+                placeholder="Mensagem"
+                rows={4}
+                required
+                style={{ ...inputStyle, resize: 'none' }}
+                className="footer-input"
+              />
+              <div style={{ marginTop: '2rem' }}>
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="footer-submit"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                    background: 'none',
+                    border: 'none',
+                    cursor: submitting ? 'not-allowed' : 'pointer',
+                    fontFamily: '"Syne", sans-serif',
+                    fontWeight: 600,
+                    fontSize: '0.75rem',
+                    letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    color: submitting ? '#4a4a4a' : '#f5f0e8',
+                    padding: 0,
+                    transition: 'color 0.3s ease',
+                  }}
+                >
+                  {submitting ? 'A enviar…' : 'Enviar Mensagem'}
+                  <span
+                    className="footer-submit-line"
+                    style={{
+                      display: 'block',
+                      height: '1px',
+                      width: '40px',
+                      background: '#c9a96e',
+                      transition: 'width 0.4s ease',
+                    }}
+                  />
+                </button>
+              </div>
+            </form>
+          ) : (
+            <div style={{ padding: '2rem 0' }}>
+              <p style={{
+                fontFamily: '"Syne", sans-serif',
+                fontWeight: 600,
+                fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)',
+                color: '#f5f0e8',
+                marginBottom: '0.75rem',
+              }}>
+                Mensagem recebida.
+              </p>
+              <p style={{
+                fontFamily: '"Inter", sans-serif',
+                fontSize: '0.9rem',
+                color: '#6b6b6b',
+              }}>
+                Entraremos em contacto em breve.
+              </p>
+            </div>
+          )}
+
+          {/* Studio info */}
+          <div ref={infoRef} style={{ opacity: 0, display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+            <div>
+              <p style={{
+                fontFamily: '"Inter", sans-serif',
+                fontSize: '0.68rem',
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: '#4a4a4a',
+                marginBottom: '0.9rem',
+              }}>
+                Contacto Directo
+              </p>
+              <a
+                href={`mailto:${studio.email}`}
+                className="footer-email-link"
+                style={{
+                  fontFamily: '"Syne", sans-serif',
+                  fontWeight: 600,
+                  fontSize: 'clamp(0.95rem, 1.6vw, 1.3rem)',
+                  color: '#f5f0e8',
+                  transition: 'color 0.3s ease',
+                  display: 'block',
+                  marginBottom: '0.5rem',
+                }}
+              >
+                {studio.email}
+              </a>
+              <a
+                href={`tel:${studio.phone.replace(/\s/g, '')}`}
+                style={{
+                  fontFamily: '"Inter", sans-serif',
+                  fontSize: '0.85rem',
+                  color: '#6b6b6b',
+                  transition: 'color 0.3s ease',
+                }}
+                className="footer-phone-link"
+              >
+                {studio.phone}
+              </a>
+            </div>
+
+            <div>
+              <p style={{
+                fontFamily: '"Inter", sans-serif',
+                fontSize: '0.68rem',
+                letterSpacing: '0.16em',
+                textTransform: 'uppercase',
+                color: '#4a4a4a',
+                marginBottom: '0.9rem',
+              }}>
+                Social
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                {Object.entries(studio.social).map(([platform, url]) => (
+                  <a
+                    key={platform}
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-social-link"
+                    style={{
+                      fontFamily: '"Inter", sans-serif',
+                      fontSize: '0.85rem',
+                      color: '#6b6b6b',
+                      textTransform: 'capitalize',
+                      transition: 'color 0.3s ease',
+                      width: 'fit-content',
+                    }}
+                  >
+                    {platform}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div style={{
+        padding: '1.5rem clamp(1.5rem, 5vw, 5.5rem)',
+        borderTop: '1px solid #1c1c1c',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '1.5rem',
+      }}>
+        <span style={{
+          fontFamily: '"Syne", sans-serif',
+          fontWeight: 800,
+          fontSize: '1rem',
+          letterSpacing: '-0.04em',
+          color: '#f5f0e8',
+        }}>
+          {studio.name}
+        </span>
+
+        <nav aria-label="Rodapé">
+          <ul role="list" style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
+            {nav.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="footer-nav-link"
+                  style={{
+                    fontFamily: '"Inter", sans-serif',
+                    fontSize: '0.75rem',
+                    color: '#4a4a4a',
+                    letterSpacing: '0.04em',
+                    transition: 'color 0.3s ease',
+                  }}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <span style={{
+          fontFamily: '"Inter", sans-serif',
+          fontSize: '0.72rem',
+          color: '#4a4a4a',
+          letterSpacing: '0.04em',
+        }}>
+          © {new Date().getFullYear()} {studio.name}
+        </span>
+      </div>
+
+      <style>{`
+        .footer-input:focus { border-bottom-color: #c9a96e !important; }
+        .footer-submit:hover .footer-submit-line { width: 64px !important; }
+        .footer-email-link:hover,
+        .footer-phone-link:hover,
+        .footer-social-link:hover,
+        .footer-nav-link:hover { color: #f5f0e8 !important; }
+      `}</style>
+    </footer>
+  )
+}

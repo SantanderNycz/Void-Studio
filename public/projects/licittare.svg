@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <pattern id="grid-li" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-width="0.4" opacity="0.05"/>
+    </pattern>
+    <linearGradient id="bg-li" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1f14"/>
+      <stop offset="100%" stop-color="#060f0a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg-li)"/>
+  <rect width="1280" height="720" fill="url(#grid-li)"/>
+
+  <rect x="0" y="0" width="1280" height="3" fill="#1A5C38" opacity="0.7"/>
+
+  <text x="64" y="96" font-family="sans-serif" font-size="13" font-weight="500" fill="#c9a96e" opacity="0.9" letter-spacing="4">04</text>
+
+  <text x="640" y="330" text-anchor="middle" font-family="sans-serif" font-size="86" font-weight="800" fill="#f5f0e8" opacity="0.92" letter-spacing="-2">Licittare</text>
+
+  <text x="640" y="400" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="400" fill="#c9a96e" letter-spacing="8">INSTITUCIONAL</text>
+
+  <line x1="566" y1="432" x2="714" y2="432" stroke="#c9a96e" stroke-width="1" opacity="0.35"/>
+
+  <text x="640" y="686" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#ffffff" opacity="0.18" letter-spacing="2">SUBSTITUIR POR THUMBNAIL REAL · 1280 × 720 px</text>
+</svg>
