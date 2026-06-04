@@ -29,8 +29,8 @@ export default function Footer() {
 
   const navLinks = [
     { label: t.nav.projects, href: '#projetos' },
-    { label: t.nav.services, href: '#servicos' },
     { label: t.nav.studio,   href: '#estudio'  },
+    { label: t.nav.services, href: '#servicos' },
     { label: t.nav.contact,  href: '#contacto' },
   ]
 

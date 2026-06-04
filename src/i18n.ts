@@ -1,5 +1,5 @@
 /**
- * VOID Studio — Translations
+ * VOID Studio - Translations
  * Add or edit strings here. Components consume via useLanguage().
  */
 
@@ -64,7 +64,7 @@ export const translations = {
         {
           title: "Sites Institucionais",
           description:
-            "A identidade digital completa do seu negócio — do design ao último detalhe.",
+            "A identidade digital completa do seu negócio - do design ao último detalhe.",
         },
         {
           title: "E-commerce",
@@ -76,8 +76,55 @@ export const translations = {
 
     // About section
     about: {
-      text: "Somos um estúdio digital de Porto. Construímos com intenção — cada detalhe tem peso, cada interacção tem propósito.",
+      text: "Somos um estúdio digital de Porto. Construímos com intenção. Cada detalhe tem peso, cada interacção tem propósito.",
       subtext: "Fundado em 2021.",
+    },
+
+    // Pricing section
+    pricing: {
+      heading: "Serviços",
+      label: "Pacotes",
+      packages: [
+        {
+          number: "01",
+          name: "Landing Page",
+          price: "150€",
+          from: "a partir de",
+          features: [
+            "1 página com scroll único ou secções essenciais",
+            "Design original e responsivo (mobile + desktop)",
+            "Integração básica: WhatsApp, formulário ou link externo",
+            "Deploy com domínio limpo",
+          ],
+        },
+        {
+          number: "02",
+          name: "Site Institucional",
+          price: "350€",
+          from: "a partir de",
+          features: [
+            "Tudo do pacote anterior",
+            "3 a 5 páginas com arquitectura de informação estruturada",
+            "SEO on-page básico",
+            "Identidade visual aplicada de forma consistente",
+            "CMS simples para edição de conteúdo (opcional)",
+          ],
+        },
+        {
+          number: "03",
+          name: "Extras",
+          price: "Sob consulta",
+          from: "orçamento personalizado",
+          features: [
+            'Registo de domínio: ".com" ou ".pt" ~20€/ano',
+            "Identidade visual: paleta, tipografia e elementos gráficos desenvolvidos especificamente para o projecto. Sob consulta.",
+          ],
+        },
+      ],
+      cta: {
+        note: "Cada projecto é orçado individualmente.",
+        button: "Falar conosco",
+      },
     },
 
     // Footer / contact
@@ -92,13 +139,14 @@ export const translations = {
       submitting: "A enviar…",
       successTitle: "Mensagem recebida.",
       successSub: "Entraremos em contacto em breve.",
-      errorMsg: "Ocorreu um erro. Tente novamente ou envie um email directamente.",
+      errorMsg:
+        "Ocorreu um erro. Tente novamente ou envie um email directamente.",
     },
 
     // Misc
     misc: {
       scrollHint: "Scroll",
-      locationLabel: "Porto, PT — Estúdio Digital",
+      locationLabel: "Porto, PT - Estúdio Digital",
     },
   },
 
@@ -154,19 +202,66 @@ export const translations = {
         {
           title: "Institutional Sites",
           description:
-            "Your complete digital identity — from design to the last detail.",
+            "Your complete digital identity - from design to the last detail.",
         },
-        {
-          title: "E-commerce",
-          description:
-            "Stores that sell while you sleep. Built to grow with your business.",
-        },
+        // {
+        //   title: "E-commerce",
+        //   description:
+        //     "Stores that sell while you sleep. Built to grow with your business.",
+        // },
       ],
     },
 
     about: {
-      text: "We are a digital studio from Porto. We build with intention — every detail has weight, every interaction has purpose.",
+      text: "We are a digital studio from Porto. We build with intention. Every detail has weight, every interaction has purpose.",
       subtext: "Founded in 2021.",
+    },
+
+    // Pricing section
+    pricing: {
+      heading: "Services",
+      label: "Packages",
+      packages: [
+        {
+          number: "01",
+          name: "Landing Page",
+          price: "150€",
+          from: "starting from",
+          features: [
+            "Single-scroll page with essential sections",
+            "Original responsive design (mobile + desktop)",
+            "Basic integration: WhatsApp, form or external link",
+            "Deploy with clean domain",
+          ],
+        },
+        {
+          number: "02",
+          name: "Institutional Site",
+          price: "350€",
+          from: "starting from",
+          features: [
+            "Everything in the previous package",
+            "3 to 5 pages with structured information architecture",
+            "Basic on-page SEO",
+            "Visual identity applied consistently across all pages",
+            "Simple CMS for content editing (optional)",
+          ],
+        },
+        {
+          number: "03",
+          name: "Extras",
+          price: "On request",
+          from: "custom quote",
+          features: [
+            'Domain registration: ".com" or ".pt" ~20€/year',
+            "Visual identity: colour palette, typography and graphic elements developed specifically for the project. On request.",
+          ],
+        },
+      ],
+      cta: {
+        note: "Each project is quoted individually.",
+        button: "Talk to us",
+      },
     },
 
     footer: {
@@ -185,7 +280,7 @@ export const translations = {
 
     misc: {
       scrollHint: "Scroll",
-      locationLabel: "Porto, PT — Digital Studio",
+      locationLabel: "Porto, PT - Digital Studio",
     },
   },
 } as const;

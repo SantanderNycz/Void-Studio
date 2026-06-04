@@ -1,5 +1,5 @@
 /**
- * VOID Studio — Content Configuration
+ * VOID Studio - Content Configuration
  *
  * All copy and data lives here. Edit this file to update the site
  * without touching component code. See README.md for instructions.
@@ -14,7 +14,6 @@ export const studio = {
   social: {
     instagram: "https://instagram.com/v0id_studi0",
     linkedin: "https://linkedin.com/company/v0idstudi0",
-    behance: "https://behance.net/voidstudio",
   },
 };
 
@@ -33,7 +32,7 @@ export const projects = [
     name: "Casa Santé",
     category: "Landing Page",
     description: "Presença elegante para um salão de estética e bem-estar.",
-    year: "2024",
+    year: "2026",
     url: "https://casa-sante.vercel.app/",
     // Replace: drop your screenshot into public/projects/casa-sante.png (or .jpg/.webp)
     image: "/projects/casa-sante.png",
@@ -45,7 +44,7 @@ export const projects = [
     category: "E-commerce",
     description:
       "Loja de bicicletas eléctricas personalizadas com design premium.",
-    year: "2024",
+    year: "2026",
     url: "https://bikcraft-bc.vercel.app/",
     image: "/projects/bikcraft.png",
     accentColor: "#1A2744",
@@ -55,7 +54,7 @@ export const projects = [
     name: "Dogs",
     category: "Rede Social",
     description: "Plataforma social para amantes de cães partilharem momentos.",
-    year: "2024",
+    year: "2026",
     url: "https://dogs-socialnet.vercel.app/",
     image: "/projects/dogs.png",
     accentColor: "#3D2B1F",
@@ -94,7 +93,7 @@ export const services = [
     number: "02",
     title: "Sites Institucionais",
     description:
-      "A identidade digital completa do seu negócio — do design ao último detalhe.",
+      "A identidade digital completa do seu negócio - do design ao último detalhe.",
   },
   {
     number: "03",
@@ -105,7 +104,7 @@ export const services = [
 ];
 
 export const about = {
-  text: "Somos um estúdio digital de Porto. Construímos com intenção — cada detalhe tem peso, cada interacção tem propósito.",
+  text: "Somos um estúdio digital de Porto. Construímos com intenção. Cada detalhe tem peso, cada interacção tem propósito.",
   subtext: "Fundado em 2021.",
 };
 

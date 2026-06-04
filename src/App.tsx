@@ -6,8 +6,8 @@ import IntroAnimation from './components/IntroAnimation'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Projects from './components/Projects'
-import Services from './components/Services'
 import About from './components/About'
+import Pricing from './components/Pricing'
 import Footer from './components/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -31,8 +31,8 @@ export default function App() {
         <main>
           <Hero animate={introComplete} />
           <Projects />
-          <Services />
           <About />
+          <Pricing />
         </main>
 
         <Footer />
