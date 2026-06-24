@@ -30,6 +30,10 @@ export const translations = {
       items: [
         {
           description:
+            "Academia de estética especializada em lash lifting, laminação e design de sobrancelhas.",
+        },
+        {
+          description:
             "Presença elegante para um salão de estética e bem-estar.",
         },
         {
@@ -169,6 +173,10 @@ export const translations = {
       label: "Selected work",
       cta: "View Project",
       items: [
+        {
+          description:
+            "Beauty academy specialised in lash lifting, brow lamination and eyebrow design.",
+        },
         {
           description:
             "Elegant digital presence for a beauty and wellness salon.",

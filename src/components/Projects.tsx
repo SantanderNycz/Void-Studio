@@ -7,6 +7,7 @@ import { useLanguage } from "../LanguageContext";
 gsap.registerPlugin(ScrollTrigger);
 
 const GRADIENTS = [
+  "linear-gradient(160deg, #241a10 0%, #100c07 100%)",
   "linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)",
   "linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)",
   "linear-gradient(160deg, #1e1208 0%, #0d0804 100%)",
@@ -14,7 +15,7 @@ const GRADIENTS = [
   "linear-gradient(160deg, #2a1c00 0%, #110c00 100%)",
 ];
 
-const ACCENT_COLORS = ["#8B5E3C", "#2A4A7A", "#5C3D1E", "#1A5C38", "#8B6914"];
+const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
 function ProjectCard({
   project,

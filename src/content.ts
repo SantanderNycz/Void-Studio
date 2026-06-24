@@ -29,17 +29,26 @@ export const hero = {
 export const projects = [
   {
     id: "01",
+    name: "Fernanda Garcia",
+    category: "Academia",
+    description: "Academia de estética especializada em lash lifting e design de sobrancelhas.",
+    year: "2025",
+    url: "https://fernandagarciaacademy.com/",
+    image: "/projects/fernanda-garcia.png",
+    accentColor: "#8B6E45",
+  },
+  {
+    id: "02",
     name: "Casa Santé",
     category: "Landing Page",
     description: "Presença elegante para um salão de estética e bem-estar.",
     year: "2026",
     url: "https://casa-sante.vercel.app/",
-    // Replace: drop your screenshot into public/projects/casa-sante.png (or .jpg/.webp)
     image: "/projects/casa-sante.png",
     accentColor: "#5C4A3A",
   },
   {
-    id: "02",
+    id: "03",
     name: "Bikcraft",
     category: "E-commerce",
     description:
@@ -50,7 +59,7 @@ export const projects = [
     accentColor: "#1A2744",
   },
   {
-    id: "03",
+    id: "04",
     name: "Dogs",
     category: "Rede Social",
     description: "Plataforma social para amantes de cães partilharem momentos.",
@@ -60,7 +69,7 @@ export const projects = [
     accentColor: "#3D2B1F",
   },
   {
-    id: "04",
+    id: "05",
     name: "Licittare",
     category: "Institucional",
     description: "Plataforma digital moderna para licitações e procurement.",
@@ -70,7 +79,7 @@ export const projects = [
     accentColor: "#1A3A2A",
   },
   {
-    id: "05",
+    id: "06",
     name: "Duck Shop",
     category: "E-commerce",
     description:
