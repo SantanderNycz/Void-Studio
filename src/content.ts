@@ -31,7 +31,8 @@ export const projects = [
     id: "01",
     name: "Fernanda Garcia",
     category: "Maquiadora",
-    description: "Academia de estética especializada em lash lifting e design de sobrancelhas.",
+    description:
+      "Academia de estética especializada em lash lifting e design de sobrancelhas.",
     year: "2026",
     url: "https://fernandagarciaacademy.com/",
     image: "/projects/fernanda-garcia.png",
@@ -60,6 +61,17 @@ export const projects = [
   },
   {
     id: "04",
+    name: "Léo Nycz",
+    category: "Portfólio",
+    description:
+      "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
+    year: "2026",
+    url: "https://portfolio-leo-nycz.vercel.app/",
+    image: "/projects/portfolio.png",
+    accentColor: "#1A2E4A",
+  },
+  {
+    id: "05",
     name: "Dogs",
     category: "Rede Social",
     description: "Plataforma social para amantes de cães partilharem momentos.",
@@ -69,7 +81,7 @@ export const projects = [
     accentColor: "#3D2B1F",
   },
   {
-    id: "05",
+    id: "06",
     name: "Licittare",
     category: "Institucional",
     description: "Plataforma digital moderna para licitações e procurement.",
@@ -79,7 +91,7 @@ export const projects = [
     accentColor: "#1A3A2A",
   },
   {
-    id: "06",
+    id: "07",
     name: "Duck Shop",
     category: "E-commerce",
     description:
@@ -88,17 +100,6 @@ export const projects = [
     url: "https://duck-shop-ff.vercel.app/",
     image: "/projects/duck-shop.png",
     accentColor: "#5C4200",
-  },
-  {
-    id: "07",
-    name: "Léo Nycz",
-    category: "Portfólio",
-    description:
-      "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
-    year: "2026",
-    url: "https://portfolio-leo-nycz.vercel.app/",
-    image: "/projects/leo-nycz.png",
-    accentColor: "#1A2E4A",
   },
 ];
 
