@@ -13,9 +13,10 @@ const GRADIENTS = [
   "linear-gradient(160deg, #1e1208 0%, #0d0804 100%)",
   "linear-gradient(160deg, #0a1f14 0%, #060f0a 100%)",
   "linear-gradient(160deg, #2a1c00 0%, #110c00 100%)",
+  "linear-gradient(160deg, #0d1520 0%, #070b10 100%)",
 ];
 
-const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#5C3D1E", "#1A5C38", "#8B6914"];
+const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#5C3D1E", "#1A5C38", "#8B6914", "#1A3A6A"];
 
 function ProjectCard({
   project,

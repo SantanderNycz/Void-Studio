@@ -30,7 +30,7 @@ export const translations = {
       items: [
         {
           description:
-            "Academia de estética especializada em lash lifting, laminação e design de sobrancelhas.",
+            "Presença digital para uma profissional especializada em lash lifting, laminação e design de sobrancelhas.",
         },
         {
           description:
@@ -51,6 +51,10 @@ export const translations = {
         {
           description:
             "Loja de coleccionáveis com branding divertido e navegação simples.",
+        },
+        {
+          description:
+            "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
         },
       ],
     },
@@ -175,7 +179,7 @@ export const translations = {
       items: [
         {
           description:
-            "Beauty academy specialised in lash lifting, brow lamination and eyebrow design.",
+            "Digital presence for a professional specialised in lash lifting, brow lamination and eyebrow design.",
         },
         {
           description:
@@ -194,6 +198,10 @@ export const translations = {
         {
           description:
             "Collectibles shop with playful branding and clean navigation.",
+        },
+        {
+          description:
+            "Full-stack development portfolio featuring web applications, games and 3D experiences.",
         },
       ],
     },

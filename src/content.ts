@@ -30,9 +30,9 @@ export const projects = [
   {
     id: "01",
     name: "Fernanda Garcia",
-    category: "Academia",
+    category: "Maquiadora",
     description: "Academia de estética especializada em lash lifting e design de sobrancelhas.",
-    year: "2025",
+    year: "2026",
     url: "https://fernandagarciaacademy.com/",
     image: "/projects/fernanda-garcia.png",
     accentColor: "#8B6E45",
@@ -88,6 +88,17 @@ export const projects = [
     url: "https://duck-shop-ff.vercel.app/",
     image: "/projects/duck-shop.png",
     accentColor: "#5C4200",
+  },
+  {
+    id: "07",
+    name: "Léo Nycz",
+    category: "Portfólio",
+    description:
+      "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
+    year: "2026",
+    url: "https://portfolio-leo-nycz.vercel.app/",
+    image: "/projects/leo-nycz.png",
+    accentColor: "#1A2E4A",
   },
 ];
 
