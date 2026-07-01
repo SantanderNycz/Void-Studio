@@ -30,7 +30,7 @@ export const projects = [
   {
     id: "01",
     name: "Fernanda Garcia",
-    category: "Maquiadora",
+    category: "Institucional",
     description:
       "Academia de estética especializada em lash lifting e design de sobrancelhas.",
     year: "2026",
@@ -97,7 +97,7 @@ export const projects = [
     description:
       "Loja de coleccionáveis com branding divertido e navegação simples.",
     year: "2023",
-    url: "https://duck-shop-ff.vercel.app/",
+    url: "https://duck-shop-vs.vercel.app/",
     image: "/projects/duck-shop.png",
     accentColor: "#5C4200",
   },
