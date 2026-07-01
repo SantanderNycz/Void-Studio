@@ -28,35 +28,35 @@ export const translations = {
       label: "Trabalho selecionado",
       cta: "Ver Projecto",
       items: [
-        {
-          description:
-            "Presença digital para uma profissional especializada em lash lifting, laminação e design de sobrancelhas.",
-        },
-        {
-          description:
-            "Presença elegante para um salão de estética e bem-estar.",
-        },
-        {
-          description:
-            "Loja de bicicletas eléctricas personalizadas com design premium.",
-        },
-        {
-          description:
-            "Plataforma social para amantes de cães partilharem momentos.",
-        },
-        {
-          description:
-            "Plataforma digital moderna para licitações e procurement.",
-        },
-        {
-          description:
-            "Loja de coleccionáveis com branding divertido e navegação simples.",
-        },
-        {
-          description:
-            "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
-        },
-      ],
+  {
+    description:
+      "Presença digital para uma profissional especializada em lash lifting, laminação e design de sobrancelhas.",
+  },
+  {
+    description:
+      "Presença elegante para um salão de estética e bem-estar.",
+  },
+  {
+    description:
+      "Loja de bicicletas eléctricas personalizadas com design premium.",
+  },
+  {
+    description:
+      "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
+  },
+  {
+    description:
+      "Plataforma social para amantes de cães partilharem momentos.",
+  },
+  {
+    description:
+      "Plataforma digital moderna para licitações e procurement.",
+  },
+  {
+    description:
+      "Loja de coleccionáveis com branding divertido e navegação simples.",
+  },
+],
     },
 
     // Services section
