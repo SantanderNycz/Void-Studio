@@ -72,6 +72,16 @@ export const projects = [
   },
   {
     id: "05",
+    name: "Le Clarté",
+    category: "E-commerce",
+    description: "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
+    year: "2026",
+    url: "https://le-clarte.vercel.app/",
+    image: "/projects/le-clarte.png",
+    accentColor: "#B8906A",
+  },
+  {
+    id: "06",
     name: "Dogs",
     category: "Rede Social",
     description: "Plataforma social para amantes de cães partilharem momentos.",
@@ -81,7 +91,7 @@ export const projects = [
     accentColor: "#3D2B1F",
   },
   {
-    id: "06",
+    id: "07",
     name: "Licittare",
     category: "Institucional",
     description: "Plataforma digital moderna para licitações e procurement.",
@@ -91,7 +101,7 @@ export const projects = [
     accentColor: "#1A3A2A",
   },
   {
-    id: "07",
+    id: "08",
     name: "Duck Shop",
     category: "E-commerce",
     description:

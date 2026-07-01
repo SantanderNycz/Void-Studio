@@ -46,6 +46,10 @@ export const translations = {
   },
   {
     description:
+      "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
+  },
+  {
+    description:
       "Plataforma social para amantes de cães partilharem momentos.",
   },
   {
@@ -191,6 +195,10 @@ export const translations = {
         {
           description:
             "Full-stack development portfolio featuring web applications, games and 3D experiences.",
+        },
+        {
+          description:
+            "Luxury skincare e-commerce prototype with interactive 3D scenes built in Three.js.",
         },
         {
           description: "Social platform for dog lovers to share their moments.",
