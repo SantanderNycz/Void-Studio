@@ -7,16 +7,16 @@ import { useLanguage } from "../LanguageContext";
 gsap.registerPlugin(ScrollTrigger);
 
 const GRADIENTS = [
-  "linear-gradient(160deg, #241a10 0%, #100c07 100%)",
-  "linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)",
-  "linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)",
-  "linear-gradient(160deg, #1e1208 0%, #0d0804 100%)",
-  "linear-gradient(160deg, #0a1f14 0%, #060f0a 100%)",
-  "linear-gradient(160deg, #2a1c00 0%, #110c00 100%)",
-  "linear-gradient(160deg, #0d1520 0%, #070b10 100%)",
+  "linear-gradient(160deg, #241a10 0%, #100c07 100%)", // Fernanda Garcia
+  "linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)", // Casa Santé
+  "linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)", // Bikcraft
+  "linear-gradient(160deg, #0d1520 0%, #070b10 100%)", // Léo Nycz
+  "linear-gradient(160deg, #1e1208 0%, #0d0804 100%)", // Dogs
+  "linear-gradient(160deg, #0a1f14 0%, #060f0a 100%)", // Licittare
+  "linear-gradient(160deg, #2a1c00 0%, #110c00 100%)", // Duck Shop
 ];
 
-const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#5C3D1E", "#1A5C38", "#8B6914", "#1A3A6A"];
+const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
 function ProjectCard({
   project,
@@ -106,15 +106,15 @@ function ProjectCard({
       }}
     >
       <div
+        className={`project-grid ${isEven ? "project-grid-even" : "project-grid-odd"}`}
         style={{
           display: "grid",
-          gridTemplateColumns: isEven ? "1fr 1.1fr" : "1.1fr 1fr",
           gap: "clamp(2rem, 4vw, 5rem)",
           alignItems: "center",
         }}
       >
         {/* Info panel */}
-        <div ref={infoRef} style={{ order: isEven ? 1 : 2 }}>
+        <div ref={infoRef} className="project-info" style={{ order: isEven ? 1 : 2 }}>
           <span
             ref={numberRef}
             style={{
@@ -195,6 +195,7 @@ function ProjectCard({
 
         {/* Image panel */}
         <div
+          className="project-image"
           style={{
             order: isEven ? 2 : 1,
             display: "flex",
@@ -255,7 +256,9 @@ function ProjectCard({
               {project.image && (
                 <img
                   src={project.image}
-                  alt={`${project.name} - preview`}
+                  alt={`${project.name} — ${project.category}, ${project.year}`}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  decoding="async"
                   style={{
                     width: "100%",
                     height: "100%",
@@ -334,7 +337,7 @@ export default function Projects() {
           opacity: 0,
         }}
       >
-        <span
+        <h2
           style={{
             fontFamily: '"Syne", sans-serif',
             fontWeight: 800,
@@ -344,7 +347,7 @@ export default function Projects() {
           }}
         >
           {t.projects.heading}
-        </span>
+        </h2>
         <span
           style={{
             fontFamily: '"Inter", sans-serif',
@@ -374,7 +377,18 @@ export default function Projects() {
         ))}
       </div>
 
-      <style>{`.project-link:hover .project-link-line { width: 56px !important; }`}</style>
+      <style>{`
+        .project-grid { grid-template-columns: 1fr; }
+        @media (min-width: 768px) {
+          .project-grid-even { grid-template-columns: 1fr 1.1fr; }
+          .project-grid-odd  { grid-template-columns: 1.1fr 1fr; }
+        }
+        @media (max-width: 767px) {
+          .project-info { order: 1 !important; }
+          .project-image { order: 2 !important; }
+        }
+        .project-link:hover .project-link-line { width: 56px !important; }
+      `}</style>
     </section>
   );
 }

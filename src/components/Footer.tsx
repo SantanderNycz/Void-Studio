@@ -98,8 +98,7 @@ export default function Footer() {
           borderBottom: '1px solid #1c1c1c',
           opacity: 0,
         }}>
-          <span style={{
-            display: 'block',
+          <h2 style={{
             fontFamily: '"Syne", sans-serif',
             fontWeight: 800,
             fontSize: 'clamp(1.6rem, 3vw, 3rem)',
@@ -108,7 +107,7 @@ export default function Footer() {
             marginBottom: '0.6rem',
           }}>
             {t.footer.heading}
-          </span>
+          </h2>
           <a href={`mailto:${studio.email}`} style={{
             fontFamily: '"Inter", sans-serif',
             fontSize: '0.78rem',

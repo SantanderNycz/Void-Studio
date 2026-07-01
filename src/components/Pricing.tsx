@@ -73,7 +73,7 @@ export default function Pricing() {
           opacity: 0,
         }}
       >
-        <span
+        <h2
           style={{
             fontFamily: '"Syne", sans-serif',
             fontWeight: 800,
@@ -83,7 +83,7 @@ export default function Pricing() {
           }}
         >
           {t.pricing.heading}
-        </span>
+        </h2>
         <span
           style={{
             fontFamily: '"Inter", sans-serif',

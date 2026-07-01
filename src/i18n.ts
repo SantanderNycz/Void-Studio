@@ -189,6 +189,10 @@ export const translations = {
           description: "Premium e-commerce for custom-built electric bicycles.",
         },
         {
+          description:
+            "Full-stack development portfolio featuring web applications, games and 3D experiences.",
+        },
+        {
           description: "Social platform for dog lovers to share their moments.",
         },
         {
@@ -198,10 +202,6 @@ export const translations = {
         {
           description:
             "Collectibles shop with playful branding and clean navigation.",
-        },
-        {
-          description:
-            "Full-stack development portfolio featuring web applications, games and 3D experiences.",
         },
       ],
     },
