@@ -72,6 +72,16 @@ export const projects = [
   },
   {
     id: "05",
+    name: "Vitor Sampaio",
+    category: "Cerâmica",
+    description: "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
+    year: "2026",
+    url: "https://vitor-sampaio.vercel.app/",
+    image: "/projects/vitor-sampaio.png",
+    accentColor: "#8B5A3C",
+  },
+  {
+    id: "06",
     name: "Le Clarté",
     category: "E-commerce",
     description: "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
@@ -81,7 +91,7 @@ export const projects = [
     accentColor: "#B8906A",
   },
   {
-    id: "06",
+    id: "07",
     name: "Dogs",
     category: "Rede Social",
     description: "Plataforma social para amantes de cães partilharem momentos.",
@@ -91,7 +101,7 @@ export const projects = [
     accentColor: "#3D2B1F",
   },
   {
-    id: "07",
+    id: "08",
     name: "Licittare",
     category: "Institucional",
     description: "Plataforma digital moderna para licitações e procurement.",
@@ -101,7 +111,7 @@ export const projects = [
     accentColor: "#1A3A2A",
   },
   {
-    id: "08",
+    id: "09",
     name: "Duck Shop",
     category: "E-commerce",
     description:

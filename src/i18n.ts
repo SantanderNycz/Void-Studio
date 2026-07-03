@@ -46,6 +46,10 @@ export const translations = {
   },
   {
     description:
+      "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
+  },
+  {
+    description:
       "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
   },
   {
@@ -195,6 +199,10 @@ export const translations = {
         {
           description:
             "Full-stack development portfolio featuring web applications, games and 3D experiences.",
+        },
+        {
+          description:
+            "Digital presence for an artisan ceramicist who creates unique handcrafted pieces on the pottery wheel.",
         },
         {
           description:
