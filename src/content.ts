@@ -73,7 +73,7 @@ export const projects = [
   {
     id: "05",
     name: "Vitor Sampaio",
-    category: "Cerâmica",
+    category: "Portfólio",
     description: "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
     year: "2026",
     url: "https://vitor-sampaio.vercel.app/",
