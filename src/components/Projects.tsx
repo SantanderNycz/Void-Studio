@@ -20,6 +20,23 @@ const GRADIENTS = [
 
 const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#8B5A3C", "#B8906A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
+/**
+ * How many tabs the stack may grow to before it stops offsetting.
+ * Cards past this index all pin at the same spot, so older tabs tuck away
+ * behind the active card. Without a cap, 8 accumulated tabs (~350px) plus the
+ * navbar offset overflow the viewport on shorter laptop screens.
+ */
+const STACK_CAP = 4;
+
+/**
+ * One card in the stack.
+ *
+ * Each card is `position: sticky` with a `top` offset of `index × --tab-h`,
+ * so as you scroll the cards pile up — every card that has been passed stays
+ * pinned as a thin tab, and the incoming card slides over it. This is native
+ * sticky behaviour, so scrolling back up unwinds the stack automatically and
+ * it works with JS disabled.
+ */
 function ProjectCard({
   project,
   index,
@@ -35,254 +52,53 @@ function ProjectCard({
   description: string;
   ctaLabel: string;
 }) {
-  const cardRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const infoRef = useRef<HTMLDivElement>(null);
-  const numberRef = useRef<HTMLSpanElement>(null);
-  const nameRef = useRef<HTMLHeadingElement>(null);
-  const detailRef = useRef<HTMLDivElement>(null);
-
-  const isEven = index % 2 === 0;
-
-  useLayoutEffect(() => {
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (prefersReduced) {
-      gsap.set([cardRef.current], { opacity: 1, y: 0 });
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      gsap.set(cardRef.current, { opacity: 0, y: 80 });
-      gsap.set(imageRef.current, { scale: 1.04 });
-      gsap.set(numberRef.current, { opacity: 0, x: isEven ? -20 : 20 });
-      gsap.set([nameRef.current, detailRef.current], { opacity: 0, y: 30 });
-
-      gsap
-        .timeline({
-          scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top 82%",
-            toggleActions: "play none none none",
-          },
-        })
-        .to(cardRef.current, {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-        })
-        .to(
-          imageRef.current,
-          { scale: 1, duration: 1.2, ease: "power2.out" },
-          0,
-        )
-        .to(
-          numberRef.current,
-          { opacity: 1, x: 0, duration: 0.6, ease: "power2.out" },
-          0.15,
-        )
-        .to(
-          nameRef.current,
-          { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
-          0.2,
-        )
-        .to(
-          detailRef.current,
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-          0.35,
-        );
-    }, cardRef);
-
-    return () => ctx.revert();
-  }, [isEven]);
-
   return (
     <article
-      ref={cardRef}
+      className="stack-card"
       style={{
-        opacity: 0,
-        borderTop: "1px solid #1c1c1c",
-        padding: "clamp(3rem, 5vw, 5rem) 0",
+        top: `calc(var(--stack-offset) + ${Math.min(index, STACK_CAP)} * var(--tab-h))`,
+        zIndex: index + 1,
+        background: gradient,
+        borderTop: `2px solid ${accentColor}`,
       }}
     >
-      <div
-        className={`project-grid ${isEven ? "project-grid-even" : "project-grid-odd"}`}
-        style={{
-          display: "grid",
-          gap: "clamp(2rem, 4vw, 5rem)",
-          alignItems: "center",
-        }}
-      >
-        {/* Info panel */}
-        <div ref={infoRef} className="project-info" style={{ order: isEven ? 1 : 2 }}>
-          <span
-            ref={numberRef}
-            style={{
-              display: "block",
-              fontFamily: '"Syne", sans-serif',
-              fontWeight: 500,
-              fontSize: "0.72rem",
-              letterSpacing: "0.16em",
-              color: "#c9a96e",
-              marginBottom: "clamp(1.2rem, 2vw, 2rem)",
-              opacity: 0,
-            }}
+      {/* Tab — the only strip that stays visible once the card is covered */}
+      <header className="stack-tab">
+        <span className="stack-num" style={{ color: accentColor }}>
+          {project.id}
+        </span>
+        <h3 className="stack-name">{project.name}</h3>
+        <span className="stack-cat">{project.category}</span>
+        <span className="stack-year">{project.year}</span>
+      </header>
+
+      {/* Body — revealed while this card is the active one */}
+      <div className="stack-body">
+        {project.image && (
+          <img
+            className="stack-img"
+            src={project.image}
+            alt={`${project.name} — ${project.category}, ${project.year}`}
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
+          />
+        )}
+        <div className="stack-scrim" />
+
+        <div className="stack-meta">
+          <p className="stack-desc">{description}</p>
+          <a
+            href={project.url ?? "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-link"
           >
-            {project.id}
-          </span>
-
-          <h3
-            ref={nameRef}
-            style={{
-              fontFamily: '"Syne", sans-serif',
-              fontWeight: 800,
-              fontSize: "clamp(2.4rem, 5.5vw, 6rem)",
-              lineHeight: 0.93,
-              letterSpacing: "-0.03em",
-              color: "#f5f0e8",
-              marginBottom: "clamp(1.5rem, 2.5vw, 2.5rem)",
-              opacity: 0,
-            }}
-          >
-            {project.name}
-          </h3>
-
-          <div ref={detailRef} style={{ opacity: 0 }}>
-            <p
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: "clamp(0.85rem, 1.1vw, 0.95rem)",
-                color: "#6b6b6b",
-                lineHeight: 1.65,
-                marginBottom: "clamp(2rem, 3vw, 3rem)",
-                maxWidth: "38ch",
-              }}
-            >
-              {description}
-            </p>
-
-            <a
-              href={project.url ?? "#"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "1rem",
-                fontFamily: '"Syne", sans-serif',
-                fontWeight: 600,
-                fontSize: "0.72rem",
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: "#f5f0e8",
-              }}
-            >
-              {ctaLabel}
-              <span
-                className="project-link-line"
-                style={{
-                  display: "block",
-                  height: "1px",
-                  width: "36px",
-                  background: "#c9a96e",
-                  transition: "width 0.4s ease",
-                }}
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* Image panel */}
-        <div
-          className="project-image"
-          style={{
-            order: isEven ? 2 : 1,
-            display: "flex",
-            flexDirection: "column",
-            gap: "0.75rem",
-          }}
-        >
-          {/* Category tag - above the image, same row as number */}
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            {ctaLabel}
             <span
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: "0.68rem",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-                color: "#6b6b6b",
-              }}
-            >
-              {project.category}
-            </span>
-            <span
-              style={{
-                width: "1px",
-                height: "10px",
-                background: "#2a2a2a",
-                flexShrink: 0,
-              }}
+              className="project-link-line"
+              style={{ background: accentColor }}
             />
-            <span
-              style={{
-                fontFamily: '"Inter", sans-serif',
-                fontSize: "0.68rem",
-                color: "#4a4a4a",
-              }}
-            >
-              {project.year}
-            </span>
-          </div>
-
-          {/* Image */}
-          <div
-            style={{
-              overflow: "hidden",
-              aspectRatio: "16/9",
-              position: "relative",
-            }}
-          >
-            <div
-              ref={imageRef}
-              style={{
-                width: "100%",
-                height: "100%",
-                background: gradient,
-                transformOrigin: "center center",
-                position: "relative",
-              }}
-            >
-              {project.image && (
-                <img
-                  src={project.image}
-                  alt={`${project.name} — ${project.category}, ${project.year}`}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  decoding="async"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "top",
-                    display: "block",
-                  }}
-                />
-              )}
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  height: "2px",
-                  background: accentColor,
-                  opacity: 0.5,
-                }}
-              />
-            </div>
-          </div>
+          </a>
         </div>
       </div>
     </article>
@@ -364,7 +180,7 @@ export default function Projects() {
         </span>
       </div>
 
-      <div>
+      <div className="stack">
         {projects.map((project, i) => (
           <ProjectCard
             key={project.id}
@@ -380,17 +196,167 @@ export default function Projects() {
         ))}
       </div>
 
+      {/* Trailing space so the last card can settle before the next section */}
+      <div style={{ height: "10vh" }} />
+
       <style>{`
-        .project-grid { grid-template-columns: 1fr; }
-        @media (min-width: 768px) {
-          .project-grid-even { grid-template-columns: 1fr 1.1fr; }
-          .project-grid-odd  { grid-template-columns: 1.1fr 1fr; }
+        .stack {
+          /* Tab scales with viewport height: on short screens it shrinks so the
+             accumulated stack never crowds out the active card. */
+          --tab-h: clamp(44px, 5.5vh, 60px);
+          --stack-cap: ${STACK_CAP};
+          /* The navbar is fixed and always visible, so the stack pins below it
+             instead of at top:0 — otherwise the first tab slides under it. */
+          --nav-h: 74px;
+          --stack-offset: calc(var(--nav-h) + 0.5rem);
         }
+
+        .stack-card {
+          position: sticky;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          border-radius: 4px;
+          /* Card shrinks as the stack grows so the whole pile stays on screen */
+          height: clamp(
+            280px,
+            calc(
+              100svh - var(--stack-offset) -
+              var(--stack-cap) * var(--tab-h) - 2rem
+            ),
+            560px
+          );
+          box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.55);
+        }
+
+        /* ── Tab ───────────────────────────────────────────────── */
+        .stack-tab {
+          flex: 0 0 var(--tab-h);
+          display: flex;
+          align-items: center;
+          gap: clamp(0.9rem, 2vw, 2rem);
+          padding: 0 clamp(1rem, 2.5vw, 2rem);
+        }
+        .stack-num {
+          font-family: "Syne", sans-serif;
+          font-weight: 500;
+          font-size: 0.72rem;
+          letter-spacing: 0.16em;
+          flex-shrink: 0;
+        }
+        .stack-name {
+          font-family: "Syne", sans-serif;
+          font-weight: 800;
+          font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+          letter-spacing: -0.02em;
+          color: #f5f0e8;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-right: auto;
+        }
+        .stack-cat, .stack-year {
+          font-family: "Inter", sans-serif;
+          font-size: 0.68rem;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #6b6b6b;
+          flex-shrink: 0;
+        }
+        .stack-year { color: #4a4a4a; }
+
+        /* ── Body ──────────────────────────────────────────────── */
+        .stack-body {
+          position: relative;
+          flex: 1 1 auto;
+          min-height: 0;
+        }
+        .stack-img {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: top;
+          display: block;
+        }
+        .stack-scrim {
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to top,
+            rgba(10, 10, 10, 0.62) 0%,
+            rgba(10, 10, 10, 0.22) 42%,
+            rgba(10, 10, 10, 0) 72%
+          );
+        }
+        .stack-meta {
+          position: absolute;
+          left: clamp(1rem, 2.5vw, 2rem);
+          right: clamp(1rem, 2.5vw, 2rem);
+          bottom: clamp(1rem, 2.5vw, 1.8rem);
+          display: flex;
+          flex-direction: column;
+          gap: clamp(0.8rem, 1.5vw, 1.2rem);
+          align-items: flex-start;
+          /* Frosted panel: keeps the copy readable over any thumbnail
+             without darkening the whole image. */
+          padding: clamp(0.9rem, 1.8vw, 1.3rem) clamp(1rem, 2vw, 1.5rem);
+          border-radius: 3px;
+          background: rgba(12, 12, 12, 0.42);
+          -webkit-backdrop-filter: blur(16px) saturate(120%);
+          backdrop-filter: blur(16px) saturate(120%);
+          border: 1px solid rgba(245, 240, 232, 0.08);
+        }
+        .stack-desc {
+          font-family: "Inter", sans-serif;
+          font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+          color: #c4c4c4;
+          line-height: 1.6;
+          max-width: 46ch;
+        }
+
+        .project-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 1rem;
+          font-family: "Syne", sans-serif;
+          font-weight: 600;
+          font-size: 0.72rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: #f5f0e8;
+        }
+        .project-link-line {
+          display: block;
+          height: 1px;
+          width: 36px;
+          transition: width 0.4s ease;
+        }
+        .project-link:hover .project-link-line { width: 56px; }
+
+        /* ── Mobile ────────────────────────────────────────────── */
         @media (max-width: 767px) {
-          .project-info { order: 1 !important; }
-          .project-image { order: 2 !important; }
+          .stack { --tab-h: clamp(42px, 5vh, 52px); }
+          .stack-cat, .stack-year { display: none; }
+          .stack-desc {
+            font-size: 0.82rem;
+            -webkit-line-clamp: 3;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+          }
         }
-        .project-link:hover .project-link-line { width: 56px !important; }
+
+        /* ── Reduced motion: no stacking, plain vertical list ──── */
+        @media (prefers-reduced-motion: reduce) {
+          .stack-card {
+            position: static;
+            height: auto;
+            min-height: 340px;
+            margin-bottom: 1.5rem;
+          }
+        }
       `}</style>
     </section>
   );

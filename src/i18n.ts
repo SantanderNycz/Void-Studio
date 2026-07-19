@@ -28,43 +28,43 @@ export const translations = {
       label: "Trabalho selecionado",
       cta: "Ver Projecto",
       items: [
-  {
-    description:
-      "Presença digital para uma profissional especializada em lash lifting, laminação e design de sobrancelhas.",
-  },
-  {
-    description:
-      "Presença elegante para um salão de estética e bem-estar.",
-  },
-  {
-    description:
-      "Loja de bicicletas eléctricas personalizadas com design premium.",
-  },
-  {
-    description:
-      "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
-  },
-  {
-    description:
-      "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
-  },
-  {
-    description:
-      "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
-  },
-  {
-    description:
-      "Plataforma social para amantes de cães partilharem momentos.",
-  },
-  {
-    description:
-      "Plataforma digital moderna para licitações e procurement.",
-  },
-  {
-    description:
-      "Loja de coleccionáveis com branding divertido e navegação simples.",
-  },
-],
+        {
+          description:
+            "Presença digital para uma profissional especializada em lash lifting, laminação e design de sobrancelhas.",
+        },
+        {
+          description:
+            "Presença elegante para um salão de estética e bem-estar.",
+        },
+        {
+          description:
+            "Loja de bicicletas eléctricas personalizadas com design premium.",
+        },
+        {
+          description:
+            "Portfólio de desenvolvimento full-stack com aplicações web, jogos e experiências 3D.",
+        },
+        {
+          description:
+            "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
+        },
+        {
+          description:
+            "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
+        },
+        {
+          description:
+            "Plataforma social para amantes de cães partilharem momentos.",
+        },
+        {
+          description:
+            "Plataforma digital moderna para licitações e procurement.",
+        },
+        {
+          description:
+            "Loja de coleccionáveis com branding divertido e navegação simples.",
+        },
+      ],
     },
 
     // Services section
@@ -132,8 +132,9 @@ export const translations = {
           price: "Sob consulta",
           from: "orçamento personalizado",
           features: [
-            'Registo de domínio: ".com" ou ".pt" ~20€/ano',
-            "Identidade visual: paleta, tipografia e elementos gráficos desenvolvidos especificamente para o projecto. Sob consulta.",
+            'Registo de domínio: ".com" ou ".pt"',
+            "Identidade visual: paleta, tipografia e elementos gráficos desenvolvidos especificamente para o projecto.",
+            "Fotos exclusivas dos produtos, focadas no conceito da proposta.",
           ],
         },
       ],
@@ -285,8 +286,9 @@ export const translations = {
           price: "On request",
           from: "custom quote",
           features: [
-            'Domain registration: ".com" or ".pt" ~20€/year',
-            "Visual identity: colour palette, typography and graphic elements developed specifically for the project. On request.",
+            'Domain registration: ".com" or ".pt"',
+            "Visual identity: colour palette, typography and graphic elements developed specifically for the project.",
+            "Exclusive photos of the products, highlighting the concept behind the offering.",
           ],
         },
       ],
