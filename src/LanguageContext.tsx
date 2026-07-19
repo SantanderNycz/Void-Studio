@@ -19,8 +19,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = lang
     document.title = lang === 'pt'
-      ? 'VOID Studio | Estúdio Digital — Porto'
-      : 'VOID Studio | Digital Studio — Porto'
+      ? 'VOID Studio | Estúdio Digital - Porto'
+      : 'VOID Studio | Digital Studio - Porto'
   }, [lang])
 
   return (

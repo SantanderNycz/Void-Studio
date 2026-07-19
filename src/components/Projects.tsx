@@ -21,14 +21,6 @@ const GRADIENTS = [
 const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#8B5A3C", "#B8906A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
 /**
- * How many tabs the stack may grow to before it stops offsetting.
- * Cards past this index all pin at the same spot, so older tabs tuck away
- * behind the active card. Without a cap, 8 accumulated tabs (~350px) plus the
- * navbar offset overflow the viewport on shorter laptop screens.
- */
-const STACK_CAP = 4;
-
-/**
  * One card in the stack.
  *
  * Each card is `position: sticky` with a `top` offset of `index × --tab-h`,
@@ -56,7 +48,7 @@ function ProjectCard({
     <article
       className="stack-card"
       style={{
-        top: `calc(var(--stack-offset) + ${Math.min(index, STACK_CAP)} * var(--tab-h))`,
+        top: `calc(var(--stack-offset) + ${index} * var(--tab-h))`,
         zIndex: index + 1,
         background: gradient,
         borderTop: `2px solid ${accentColor}`,
@@ -78,7 +70,7 @@ function ProjectCard({
           <img
             className="stack-img"
             src={project.image}
-            alt={`${project.name} — ${project.category}, ${project.year}`}
+            alt={`${project.name} - ${project.category}, ${project.year}`}
             loading={index === 0 ? "eager" : "lazy"}
             decoding="async"
           />
@@ -201,10 +193,11 @@ export default function Projects() {
 
       <style>{`
         .stack {
-          /* Tab scales with viewport height: on short screens it shrinks so the
-             accumulated stack never crowds out the active card. */
-          --tab-h: clamp(44px, 5.5vh, 60px);
-          --stack-cap: ${STACK_CAP};
+          /* Every tab stays visible so the reader can jump back to any project,
+             so the whole pile (${projects.length - 1} tabs) has to fit above the active card.
+             The tab therefore scales hard with viewport height. */
+          --tab-h: clamp(34px, 5vh, 56px);
+          --stack-n: ${projects.length};
           /* The navbar is fixed and always visible, so the stack pins below it
              instead of at top:0 — otherwise the first tab slides under it. */
           --nav-h: 74px;
@@ -219,10 +212,10 @@ export default function Projects() {
           border-radius: 4px;
           /* Card shrinks as the stack grows so the whole pile stays on screen */
           height: clamp(
-            280px,
+            260px,
             calc(
               100svh - var(--stack-offset) -
-              var(--stack-cap) * var(--tab-h) - 2rem
+              (var(--stack-n) - 1) * var(--tab-h) - 2rem
             ),
             560px
           );
@@ -247,7 +240,8 @@ export default function Projects() {
         .stack-name {
           font-family: "Syne", sans-serif;
           font-weight: 800;
-          font-size: clamp(1.1rem, 2.2vw, 1.9rem);
+          /* Scales with viewport *height* so it stays proportional to the tab */
+          font-size: clamp(0.95rem, 2.1vh, 1.6rem);
           letter-spacing: -0.02em;
           color: #f5f0e8;
           white-space: nowrap;
@@ -285,28 +279,30 @@ export default function Projects() {
           inset: 0;
           background: linear-gradient(
             to top,
-            rgba(10, 10, 10, 0.62) 0%,
-            rgba(10, 10, 10, 0.22) 42%,
+            rgba(10, 10, 10, 0.45) 0%,
+            rgba(10, 10, 10, 0.14) 42%,
             rgba(10, 10, 10, 0) 72%
           );
         }
         .stack-meta {
           position: absolute;
           left: clamp(1rem, 2.5vw, 2rem);
-          right: clamp(1rem, 2.5vw, 2rem);
           bottom: clamp(1rem, 2.5vw, 1.8rem);
+          /* Hugs its text instead of spanning the card, so the thumbnail
+             stays as exposed as possible. */
+          width: fit-content;
+          max-width: calc(100% - 2 * clamp(1rem, 2.5vw, 2rem));
           display: flex;
           flex-direction: column;
           gap: clamp(0.8rem, 1.5vw, 1.2rem);
           align-items: flex-start;
-          /* Frosted panel: keeps the copy readable over any thumbnail
-             without darkening the whole image. */
+          /* Barely-there tint — the blur does the legibility work, not opacity. */
           padding: clamp(0.9rem, 1.8vw, 1.3rem) clamp(1rem, 2vw, 1.5rem);
-          border-radius: 3px;
-          background: rgba(12, 12, 12, 0.42);
-          -webkit-backdrop-filter: blur(16px) saturate(120%);
-          backdrop-filter: blur(16px) saturate(120%);
-          border: 1px solid rgba(245, 240, 232, 0.08);
+          border-radius: 10px;
+          background: rgba(12, 12, 12, 0.2);
+          -webkit-backdrop-filter: blur(22px) saturate(115%);
+          backdrop-filter: blur(22px) saturate(115%);
+          border: 1px solid rgba(245, 240, 232, 0.06);
         }
         .stack-desc {
           font-family: "Inter", sans-serif;
@@ -337,7 +333,7 @@ export default function Projects() {
 
         /* ── Mobile ────────────────────────────────────────────── */
         @media (max-width: 767px) {
-          .stack { --tab-h: clamp(42px, 5vh, 52px); }
+          .stack { --tab-h: clamp(32px, 4.6vh, 46px); }
           .stack-cat, .stack-year { display: none; }
           .stack-desc {
             font-size: 0.82rem;
