@@ -123,7 +123,7 @@ export const translations = {
             "3 a 5 páginas com arquitectura de informação estruturada",
             "SEO on-page básico",
             "Identidade visual aplicada de forma consistente",
-            "CMS simples para edição de conteúdo (opcional)",
+            // "CMS simples para edição de conteúdo (opcional)",
           ],
         },
         {
@@ -277,7 +277,7 @@ export const translations = {
             "3 to 5 pages with structured information architecture",
             "Basic on-page SEO",
             "Visual identity applied consistently across all pages",
-            "Simple CMS for content editing (optional)",
+            // "Simple CMS for content editing (optional)",
           ],
         },
         {
