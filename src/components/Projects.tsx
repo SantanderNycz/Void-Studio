@@ -21,6 +21,24 @@ const GRADIENTS = [
 const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#8B5A3C", "#B8906A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
 /**
+ * Tab colours: a gold → beige gradient across the whole stack, so the pile of
+ * pinned tabs reads as one continuous ramp. Interpolated per index between a
+ * deep gold (top) and a light beige (bottom).
+ */
+function lerpHex(a: string, b: string, t: number): string {
+  const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+  const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+  const ch = pa.map((v, i) => Math.round(v + (pb[i] - v) * t));
+  return "#" + ch.map((v) => v.toString(16).padStart(2, "0")).join("");
+}
+
+const TAB_GOLD = "#a67c3d"; // deep gold — first tab
+const TAB_BEIGE = "#e7dcc2"; // light beige — last tab
+const TAB_COLORS = Array.from({ length: projects.length }, (_, i) =>
+  lerpHex(TAB_GOLD, TAB_BEIGE, projects.length === 1 ? 0 : i / (projects.length - 1)),
+);
+
+/**
  * One card in the stack.
  *
  * Each card is `position: sticky` with a `top` offset of `index × --tab-h`,
@@ -34,6 +52,7 @@ function ProjectCard({
   index,
   gradient,
   accentColor,
+  tabColor,
   description,
   ctaLabel,
 }: {
@@ -41,6 +60,7 @@ function ProjectCard({
   index: number;
   gradient: string;
   accentColor: string;
+  tabColor: string;
   description: string;
   ctaLabel: string;
 }) {
@@ -51,14 +71,11 @@ function ProjectCard({
         top: `calc(var(--stack-offset) + ${index} * var(--tab-h))`,
         zIndex: index + 1,
         background: gradient,
-        borderTop: `2px solid ${accentColor}`,
       }}
     >
       {/* Tab — the only strip that stays visible once the card is covered */}
-      <header className="stack-tab">
-        <span className="stack-num" style={{ color: accentColor }}>
-          {project.id}
-        </span>
+      <header className="stack-tab" style={{ background: tabColor }}>
+        <span className="stack-num">{project.id}</span>
         <h3 className="stack-name">{project.name}</h3>
         <span className="stack-cat">{project.category}</span>
         <span className="stack-year">{project.year}</span>
@@ -180,6 +197,7 @@ export default function Projects() {
             index={i}
             gradient={GRADIENTS[i] ?? GRADIENTS[0]}
             accentColor={ACCENT_COLORS[i] ?? ACCENT_COLORS[0]}
+            tabColor={TAB_COLORS[i] ?? TAB_COLORS[0]}
             description={
               t.projects.items[i]?.description ?? project.description
             }
@@ -229,12 +247,17 @@ export default function Projects() {
           align-items: center;
           gap: clamp(0.9rem, 2vw, 2rem);
           padding: 0 clamp(1rem, 2.5vw, 2rem);
+          /* Hairline to separate one gold tab from the next in the stack */
+          border-top: 1px solid rgba(255, 255, 255, 0.22);
+          box-shadow: inset 0 -1px 0 rgba(60, 40, 12, 0.18);
         }
+        /* Dark ink for legibility on the light gold/beige tabs */
         .stack-num {
           font-family: "Syne", sans-serif;
-          font-weight: 500;
+          font-weight: 600;
           font-size: 0.72rem;
           letter-spacing: 0.16em;
+          color: rgba(40, 27, 8, 0.7);
           flex-shrink: 0;
         }
         .stack-name {
@@ -243,7 +266,7 @@ export default function Projects() {
           /* Scales with viewport *height* so it stays proportional to the tab */
           font-size: clamp(0.95rem, 2.1vh, 1.6rem);
           letter-spacing: -0.02em;
-          color: #f5f0e8;
+          color: #241a0a;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -254,10 +277,10 @@ export default function Projects() {
           font-size: 0.68rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: #6b6b6b;
+          color: rgba(40, 27, 8, 0.62);
           flex-shrink: 0;
         }
-        .stack-year { color: #4a4a4a; }
+        .stack-year { color: rgba(40, 27, 8, 0.42); }
 
         /* ── Body ──────────────────────────────────────────────── */
         .stack-body {
