@@ -41,7 +41,7 @@ export const projects = [
   {
     id: "02",
     name: "Bárbara Santander",
-    category: "Institucional",
+    category: "Landing Page",
     description:
       "Presença digital para uma advogada previdenciária, com atendimento humano e foco em cada história.",
     year: "2026",

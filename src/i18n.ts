@@ -108,7 +108,7 @@ export const translations = {
         {
           number: "01",
           name: "Landing Page",
-          price: "150€",
+          price: "200€",
           from: "a partir de",
           features: [
             "1 página com scroll único ou secções essenciais",
@@ -266,7 +266,7 @@ export const translations = {
         {
           number: "01",
           name: "Landing Page",
-          price: "150€",
+          price: "200€",
           from: "starting from",
           features: [
             "Single-scroll page with essential sections",
