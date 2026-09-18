@@ -40,6 +40,17 @@ export const projects = [
   },
   {
     id: "02",
+    name: "Bárbara Santander",
+    category: "Institucional",
+    description:
+      "Presença digital para uma advogada previdenciária, com atendimento humano e foco em cada história.",
+    year: "2026",
+    url: "https://barbara-santander.vercel.app/",
+    image: "/projects/barbara.png",
+    accentColor: "#8A7460",
+  },
+  {
+    id: "03",
     name: "Casa Santé",
     category: "Landing Page",
     description: "Presença elegante para um salão de estética e bem-estar.",
@@ -49,7 +60,7 @@ export const projects = [
     accentColor: "#5C4A3A",
   },
   {
-    id: "03",
+    id: "04",
     name: "Bikcraft",
     category: "E-commerce",
     description:
@@ -60,7 +71,7 @@ export const projects = [
     accentColor: "#1A2744",
   },
   {
-    id: "04",
+    id: "05",
     name: "Léo Nycz",
     category: "Portfólio",
     description:
@@ -71,7 +82,7 @@ export const projects = [
     accentColor: "#1A2E4A",
   },
   {
-    id: "05",
+    id: "06",
     name: "Vitor Sampaio",
     category: "Portfólio",
     description: "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
@@ -81,7 +92,7 @@ export const projects = [
     accentColor: "#8B5A3C",
   },
   {
-    id: "06",
+    id: "07",
     name: "Le Clarté",
     category: "E-commerce",
     description: "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
@@ -91,7 +102,7 @@ export const projects = [
     accentColor: "#B8906A",
   },
   {
-    id: "07",
+    id: "08",
     name: "Dogs",
     category: "Rede Social",
     description: "Plataforma social para amantes de cães partilharem momentos.",
@@ -101,7 +112,7 @@ export const projects = [
     accentColor: "#3D2B1F",
   },
   {
-    id: "08",
+    id: "09",
     name: "Licittare",
     category: "Institucional",
     description: "Plataforma digital moderna para licitações e procurement.",
@@ -111,7 +122,7 @@ export const projects = [
     accentColor: "#1A3A2A",
   },
   {
-    id: "09",
+    id: "10",
     name: "Duck Shop",
     category: "E-commerce",
     description:

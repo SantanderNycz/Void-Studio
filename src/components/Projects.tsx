@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const GRADIENTS = [
   "linear-gradient(160deg, #241a10 0%, #100c07 100%)", // Fernanda Garcia
+  "linear-gradient(160deg, #2a231e 0%, #120e0b 100%)", // Bárbara Santander
   "linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)", // Casa Santé
   "linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)", // Bikcraft
   "linear-gradient(160deg, #0d1520 0%, #070b10 100%)", // Léo Nycz
@@ -18,7 +19,7 @@ const GRADIENTS = [
   "linear-gradient(160deg, #2a1c00 0%, #110c00 100%)", // Duck Shop
 ];
 
-const ACCENT_COLORS = ["#8B6E45", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#8B5A3C", "#B8906A", "#5C3D1E", "#1A5C38", "#8B6914"];
+const ACCENT_COLORS = ["#8B6E45", "#8A7460", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#8B5A3C", "#B8906A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
 /**
  * Tab colours: a gold → beige gradient across the whole stack, so the pile of

@@ -34,6 +34,10 @@ export const translations = {
         },
         {
           description:
+            "Presença digital para uma advogada previdenciária, com atendimento humano e foco em cada história.",
+        },
+        {
+          description:
             "Presença elegante para um salão de estética e bem-estar.",
         },
         {
@@ -189,6 +193,10 @@ export const translations = {
         {
           description:
             "Digital presence for a professional specialised in lash lifting, brow lamination and eyebrow design.",
+        },
+        {
+          description:
+            "Digital presence for a social-security lawyer, with a human approach focused on each client's story.",
         },
         {
           description:
