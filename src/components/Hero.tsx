@@ -108,7 +108,7 @@ export default function Hero({ animate }: Props) {
           flexShrink: 0,
         }} />
         <span style={{
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Onest", sans-serif',
           color: '#6b6b6b',
           fontSize: '0.7rem',
           letterSpacing: '0.2em',
@@ -187,7 +187,7 @@ export default function Hero({ animate }: Props) {
         aria-hidden="true"
       >
         <span style={{
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Onest", sans-serif',
           color: '#4a4a4a',
           fontSize: '0.68rem',
           letterSpacing: '0.18em',
@@ -208,7 +208,7 @@ export default function Hero({ animate }: Props) {
         aria-hidden="true"
       >
         <span style={{
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Onest", sans-serif',
           color: '#4a4a4a',
           fontSize: '0.68rem',
           letterSpacing: '0.12em',

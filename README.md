@@ -7,7 +7,7 @@ Premium portfolio website for VOID, a web development studio based in Porto, Por
 - **React 19 + Vite 8 + TypeScript**
 - **Tailwind CSS v4** - utility-first styling via CSS `@theme` config
 - **GSAP 3 + ScrollTrigger** - all scroll and entrance animations
-- **Google Fonts** - Syne (display) + Inter (body)
+- **Google Fonts** - Syne (display) + Onest (body)
 
 ## Getting Started
 

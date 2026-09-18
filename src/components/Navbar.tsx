@@ -107,9 +107,10 @@ export default function Navbar({ visible }: Props) {
                 href={item.href}
                 className="nav-link"
                 style={{
-                  fontFamily: '"Inter", sans-serif',
-                  fontSize: "0.9rem",
-                  letterSpacing: "0.04em",
+                  fontFamily: '"Onest", sans-serif',
+                  fontSize: "0.85rem",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
                   color: "#6b6b6b",
                   transition: "color 0.3s ease",
                 }}
@@ -252,7 +253,7 @@ export default function Navbar({ visible }: Props) {
                 >
                   <span
                     style={{
-                      fontFamily: '"Inter", sans-serif',
+                      fontFamily: '"Onest", sans-serif',
                       fontSize: "0.65rem",
                       letterSpacing: "0.12em",
                       color: "#c9a96e",
@@ -287,7 +288,7 @@ export default function Navbar({ visible }: Props) {
             />
             <span
               style={{
-                fontFamily: '"Inter", sans-serif',
+                fontFamily: '"Onest", sans-serif',
                 fontSize: "0.7rem",
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",

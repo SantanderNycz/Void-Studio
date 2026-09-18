@@ -57,7 +57,7 @@ export default function Services() {
           {t.services.heading}
         </span>
         <span style={{
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Onest", sans-serif',
           fontSize: '0.7rem',
           letterSpacing: '0.14em',
           textTransform: 'uppercase',
@@ -110,7 +110,7 @@ export default function Services() {
             </h3>
 
             <p style={{
-              fontFamily: '"Inter", sans-serif',
+              fontFamily: '"Onest", sans-serif',
               fontSize: 'clamp(0.85rem, 1.05vw, 0.95rem)',
               color: '#6b6b6b',
               lineHeight: 1.7,

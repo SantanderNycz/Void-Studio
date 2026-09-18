@@ -188,7 +188,7 @@ export default function Projects() {
         </h2>
         <span
           style={{
-            fontFamily: '"Inter", sans-serif',
+            fontFamily: '"Onest", sans-serif',
             fontSize: "0.7rem",
             letterSpacing: "0.14em",
             textTransform: "uppercase",
@@ -288,7 +288,7 @@ export default function Projects() {
           margin-right: auto;
         }
         .stack-cat, .stack-year {
-          font-family: "Inter", sans-serif;
+          font-family: "Onest", sans-serif;
           font-size: 0.68rem;
           letter-spacing: 0.14em;
           text-transform: uppercase;
@@ -330,7 +330,7 @@ export default function Projects() {
           display: block;
         }
         .stack-desc {
-          font-family: "Inter", sans-serif;
+          font-family: "Onest", sans-serif;
           font-size: clamp(0.9rem, 1.15vw, 1.05rem);
           /* Warm light grey — kept bright enough to stay legible on the lighter
              gold cards at the end of the ramp. */

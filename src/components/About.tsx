@@ -67,7 +67,7 @@ export default function About() {
         </p>
 
         <p ref={subRef} style={{
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Onest", sans-serif',
           fontSize: 'clamp(0.8rem, 1vw, 0.9rem)',
           color: '#6b6b6b',
           opacity: 0,
@@ -87,7 +87,7 @@ export default function About() {
             borderRadius: '50%', background: '#c9a96e', flexShrink: 0,
           }} aria-hidden="true" />
           <span style={{
-            fontFamily: '"Inter", sans-serif',
+            fontFamily: '"Onest", sans-serif',
             fontSize: '0.7rem',
             letterSpacing: '0.18em',
             textTransform: 'uppercase',

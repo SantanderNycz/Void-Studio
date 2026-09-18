@@ -86,7 +86,7 @@ export default function Pricing() {
         </h2>
         <span
           style={{
-            fontFamily: '"Inter", sans-serif',
+            fontFamily: '"Onest", sans-serif',
             fontSize: '0.7rem',
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
@@ -148,7 +148,7 @@ export default function Pricing() {
                 <span
                   style={{
                     display: 'block',
-                    fontFamily: '"Inter", sans-serif',
+                    fontFamily: '"Onest", sans-serif',
                     fontSize: '0.68rem',
                     letterSpacing: '0.08em',
                     color: '#4a4a4a',
@@ -177,7 +177,7 @@ export default function Pricing() {
                 <li
                   key={fi}
                   style={{
-                    fontFamily: '"Inter", sans-serif',
+                    fontFamily: '"Onest", sans-serif',
                     fontSize: 'clamp(0.78rem, 1vw, 0.85rem)',
                     color: '#6b6b6b',
                     lineHeight: 1.65,
@@ -208,7 +208,7 @@ export default function Pricing() {
       >
         <p
           style={{
-            fontFamily: '"Inter", sans-serif',
+            fontFamily: '"Onest", sans-serif',
             fontSize: 'clamp(0.78rem, 1vw, 0.85rem)',
             color: '#4a4a4a',
             fontStyle: 'italic',

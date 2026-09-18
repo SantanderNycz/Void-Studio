@@ -140,7 +140,7 @@ export default function IntroAnimation({ onComplete }: Props) {
         ref={taglineRef}
         style={{
           marginTop: "1.5rem",
-          fontFamily: '"Inter", sans-serif',
+          fontFamily: '"Onest", sans-serif',
           color: "#6b6b6b",
           fontSize: "0.7rem",
           letterSpacing: "0.22em",

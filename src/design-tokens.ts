@@ -17,7 +17,7 @@ export const colors = {
 
 export const fonts = {
   display: '"Syne", sans-serif',
-  body: '"Inter", sans-serif',
+  body: '"Onest", sans-serif',
 } as const;
 
 export const eases = {

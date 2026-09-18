@@ -77,7 +77,7 @@ export default function Footer() {
   const inputStyle: React.CSSProperties = {
     display: 'block',
     width: '100%',
-    fontFamily: '"Inter", sans-serif',
+    fontFamily: '"Onest", sans-serif',
     fontSize: '0.9rem',
     color: '#f5f0e8',
     background: 'transparent',
@@ -109,7 +109,7 @@ export default function Footer() {
             {t.footer.heading}
           </h2>
           <a href={`mailto:${studio.email}`} style={{
-            fontFamily: '"Inter", sans-serif',
+            fontFamily: '"Onest", sans-serif',
             fontSize: '0.78rem',
             letterSpacing: '0.04em',
             color: '#6b6b6b',
@@ -162,7 +162,7 @@ export default function Footer() {
                 {error && (
                   <p style={{
                     marginTop: '1rem',
-                    fontFamily: '"Inter", sans-serif',
+                    fontFamily: '"Onest", sans-serif',
                     fontSize: '0.8rem',
                     color: '#c0392b',
                   }}>
@@ -182,7 +182,7 @@ export default function Footer() {
               }}>
                 {t.footer.successTitle}
               </p>
-              <p style={{ fontFamily: '"Inter", sans-serif', fontSize: '0.9rem', color: '#6b6b6b' }}>
+              <p style={{ fontFamily: '"Onest", sans-serif', fontSize: '0.9rem', color: '#6b6b6b' }}>
                 {t.footer.successSub}
               </p>
             </div>
@@ -192,7 +192,7 @@ export default function Footer() {
           <div ref={infoRef} style={{ opacity: 0, display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
             <div>
               <p style={{
-                fontFamily: '"Inter", sans-serif',
+                fontFamily: '"Onest", sans-serif',
                 fontSize: '0.68rem', letterSpacing: '0.16em', textTransform: 'uppercase',
                 color: '#4a4a4a', marginBottom: '0.9rem',
               }}>
@@ -206,7 +206,7 @@ export default function Footer() {
                 {studio.email}
               </a>
               <a href={`tel:${studio.phone.replace(/\s/g, '')}`} className="footer-phone-link" style={{
-                fontFamily: '"Inter", sans-serif', fontSize: '0.85rem',
+                fontFamily: '"Onest", sans-serif', fontSize: '0.85rem',
                 color: '#6b6b6b', transition: 'color 0.3s ease',
               }}>
                 {studio.phone}
@@ -215,7 +215,7 @@ export default function Footer() {
 
             <div>
               <p style={{
-                fontFamily: '"Inter", sans-serif',
+                fontFamily: '"Onest", sans-serif',
                 fontSize: '0.68rem', letterSpacing: '0.16em', textTransform: 'uppercase',
                 color: '#4a4a4a', marginBottom: '0.9rem',
               }}>
@@ -226,7 +226,7 @@ export default function Footer() {
                   <a key={platform} href={url} target="_blank" rel="noopener noreferrer"
                     className="footer-social-link"
                     style={{
-                      fontFamily: '"Inter", sans-serif', fontSize: '0.85rem',
+                      fontFamily: '"Onest", sans-serif', fontSize: '0.85rem',
                       color: '#6b6b6b', textTransform: 'capitalize',
                       transition: 'color 0.3s ease', width: 'fit-content',
                     }}>
@@ -262,7 +262,7 @@ export default function Footer() {
               {navLinks.map((item) => (
                 <li key={item.href}>
                   <a href={item.href} className="footer-nav-link" style={{
-                    fontFamily: '"Inter", sans-serif', fontSize: '0.75rem',
+                    fontFamily: '"Onest", sans-serif', fontSize: '0.75rem',
                     color: '#4a4a4a', letterSpacing: '0.04em', transition: 'color 0.3s ease',
                   }}>
                     {item.label}
@@ -278,7 +278,7 @@ export default function Footer() {
           textAlign: 'center',
         }}>
           <span style={{
-            fontFamily: '"Inter", sans-serif', fontSize: '0.72rem',
+            fontFamily: '"Onest", sans-serif', fontSize: '0.72rem',
             color: '#4a4a4a', letterSpacing: '0.04em',
           }}>
             © {new Date().getFullYear()} {studio.name}
