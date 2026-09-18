@@ -6,18 +6,32 @@ import { useLanguage } from "../LanguageContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GRADIENTS = [
-  "linear-gradient(160deg, #241a10 0%, #100c07 100%)", // Fernanda Garcia
-  "linear-gradient(160deg, #2a231e 0%, #120e0b 100%)", // Bárbara Santander
-  "linear-gradient(160deg, #3a2616 0%, #1a0e08 100%)", // Casa Santé
-  "linear-gradient(160deg, #0d1a2e 0%, #060e1a 100%)", // Bikcraft
-  "linear-gradient(160deg, #0d1520 0%, #070b10 100%)", // Léo Nycz
-  "linear-gradient(160deg, #2a1208 0%, #140901 100%)", // Vitor Sampaio
-  "linear-gradient(160deg, #231c18 0%, #110e0b 100%)", // Le Clarté
-  "linear-gradient(160deg, #1e1208 0%, #0d0804 100%)", // Dogs
-  "linear-gradient(160deg, #0a1f14 0%, #060f0a 100%)", // Licittare
-  "linear-gradient(160deg, #2a1c00 0%, #110c00 100%)", // Duck Shop
-];
+function lerpHex(a: string, b: string, t: number): string {
+  const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
+  const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
+  const ch = pa.map((v, i) => Math.round(v + (pb[i] - v) * t));
+  return "#" + ch.map((v) => v.toString(16).padStart(2, "0")).join("");
+}
+
+/** Even 0 → 1 ramp position for a given card index. */
+const ramp = (i: number) =>
+  projects.length === 1 ? 0 : i / (projects.length - 1);
+
+/**
+ * Card backgrounds: one warm-gold palette that starts at a near-black dark gold
+ * (card 01) and lightens gradually to a muted mid-gold (last card). Kept dark
+ * enough throughout that the light body text stays readable. Each card is a
+ * soft vertical gradient (lighter top → darker bottom) built from two ramped
+ * endpoints.
+ */
+const CARD_TOP_DARK = "#241a10"; // first card, top stop (matches the old bg)
+const CARD_TOP_LIGHT = "#6a5230"; // last card, top stop
+const CARD_BOT_DARK = "#100c07"; // first card, bottom stop
+const CARD_BOT_LIGHT = "#453320"; // last card, bottom stop
+const GRADIENTS = Array.from({ length: projects.length }, (_, i) => {
+  const t = ramp(i);
+  return `linear-gradient(160deg, ${lerpHex(CARD_TOP_DARK, CARD_TOP_LIGHT, t)} 0%, ${lerpHex(CARD_BOT_DARK, CARD_BOT_LIGHT, t)} 100%)`;
+});
 
 const ACCENT_COLORS = ["#8B6E45", "#8A7460", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#8B5A3C", "#B8906A", "#5C3D1E", "#1A5C38", "#8B6914"];
 
@@ -26,17 +40,10 @@ const ACCENT_COLORS = ["#8B6E45", "#8A7460", "#8B5E3C", "#2A4A7A", "#1A3A6A", "#
  * pinned tabs reads as one continuous ramp. Interpolated per index between a
  * deep gold (top) and a light beige (bottom).
  */
-function lerpHex(a: string, b: string, t: number): string {
-  const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
-  const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
-  const ch = pa.map((v, i) => Math.round(v + (pb[i] - v) * t));
-  return "#" + ch.map((v) => v.toString(16).padStart(2, "0")).join("");
-}
-
 const TAB_GOLD = "#a67c3d"; // deep gold — first tab
 const TAB_BEIGE = "#e7dcc2"; // light beige — last tab
 const TAB_COLORS = Array.from({ length: projects.length }, (_, i) =>
-  lerpHex(TAB_GOLD, TAB_BEIGE, projects.length === 1 ? 0 : i / (projects.length - 1)),
+  lerpHex(TAB_GOLD, TAB_BEIGE, ramp(i)),
 );
 
 /**
@@ -325,7 +332,9 @@ export default function Projects() {
         .stack-desc {
           font-family: "Inter", sans-serif;
           font-size: clamp(0.9rem, 1.15vw, 1.05rem);
-          color: #b9b3aa;
+          /* Warm light grey — kept bright enough to stay legible on the lighter
+             gold cards at the end of the ramp. */
+          color: #d6cfc3;
           line-height: 1.7;
           max-width: 48ch;
         }
