@@ -18,7 +18,7 @@ export const studio = {
 };
 
 export const hero = {
-  lines: ["Where nothing", "becomes", "something."],
+  lines: ["Built", "from", "the void."],
   accentLineIndex: 2, // which line gets the amber accent color
   cta: {
     label: "Ver Projetos",

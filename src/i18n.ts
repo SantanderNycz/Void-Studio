@@ -17,7 +17,7 @@ export const translations = {
 
     // Hero
     hero: {
-      lines: ["Onde o nada", "se torna", "algo."],
+      lines: ["Onde o vazio", "se torna", "algo."],
       accentLineIndex: 2,
       cta: "Ver Projetos",
     },
