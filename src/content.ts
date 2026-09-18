@@ -85,7 +85,8 @@ export const projects = [
     id: "06",
     name: "Vitor Sampaio",
     category: "Portfólio",
-    description: "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
+    description:
+      "Presença digital para um ceramista artesanal que cria peças únicas trabalhadas à mão no torno.",
     year: "2026",
     url: "https://vitor-sampaio.vercel.app/",
     image: "/projects/vitor-sampaio.png",
@@ -95,7 +96,8 @@ export const projects = [
     id: "07",
     name: "Le Clarté",
     category: "E-commerce",
-    description: "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
+    description:
+      "Protótipo de e-commerce de luxo para skincare com cenas 3D interactivas em Three.js.",
     year: "2026",
     url: "https://le-clarte.vercel.app/",
     image: "/projects/le-clarte.png",

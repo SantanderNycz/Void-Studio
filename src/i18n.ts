@@ -180,7 +180,7 @@ export const translations = {
     },
 
     hero: {
-      lines: ["Where nothing", "becomes", "something."],
+      lines: ["Built", "from", "the void."],
       accentLineIndex: 2,
       cta: "View Projects",
     },
