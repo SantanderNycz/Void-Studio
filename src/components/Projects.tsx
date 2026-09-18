@@ -221,6 +221,15 @@ export default function Projects() {
              instead of at top:0 — otherwise the first tab slides under it. */
           --nav-h: 74px;
           --stack-offset: calc(var(--nav-h) + 0.5rem);
+          /* Thumbnail aspect ratio (5:3). The card body matches it exactly so
+             the whole image is shown with no cropping. */
+          --img-ar: 5 / 3;
+          /* Height left for one open card's body once every tab is pinned and
+             the active card's own tab is accounted for. The card width is then
+             derived from this so the full-image body fits without overflowing. */
+          --fit-h: calc(
+            100svh - var(--stack-offset) - var(--stack-n) * var(--tab-h) - 2rem
+          );
         }
 
         .stack-card {
@@ -229,15 +238,12 @@ export default function Projects() {
           flex-direction: column;
           overflow: hidden;
           border-radius: 4px;
-          /* Card shrinks as the stack grows so the whole pile stays on screen */
-          height: clamp(
-            260px,
-            calc(
-              100svh - var(--stack-offset) -
-              (var(--stack-n) - 1) * var(--tab-h) - 2rem
-            ),
-            560px
-          );
+          height: auto;
+          /* Card shaped to the thumbnail and centred. Width is derived from the
+             height budget so tab + full-image body + every pinned tab all fit;
+             capped so it never gets oversized on large monitors. */
+          width: min(100%, calc(var(--fit-h) * 5 / 3), 1000px);
+          margin-inline: auto;
           box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.55);
         }
 
@@ -286,8 +292,10 @@ export default function Projects() {
         /* ── Body ──────────────────────────────────────────────── */
         .stack-body {
           position: relative;
-          flex: 1 1 auto;
-          min-height: 0;
+          flex: none;
+          width: 100%;
+          /* Same ratio as the thumbnail → the image fills it with no crop */
+          aspect-ratio: var(--img-ar);
         }
         .stack-img {
           position: absolute;
@@ -295,7 +303,7 @@ export default function Projects() {
           width: 100%;
           height: 100%;
           object-fit: cover;
-          object-position: top;
+          object-position: center;
           display: block;
         }
         .stack-scrim {
@@ -372,8 +380,7 @@ export default function Projects() {
         @media (prefers-reduced-motion: reduce) {
           .stack-card {
             position: static;
-            height: auto;
-            min-height: 340px;
+            width: 100%;
             margin-bottom: 1.5rem;
           }
         }
