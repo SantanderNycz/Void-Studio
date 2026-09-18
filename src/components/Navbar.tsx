@@ -108,7 +108,7 @@ export default function Navbar({ visible }: Props) {
                 className="nav-link"
                 style={{
                   fontFamily: '"Inter", sans-serif',
-                  fontSize: "0.78rem",
+                  fontSize: "0.9rem",
                   letterSpacing: "0.04em",
                   color: "#6b6b6b",
                   transition: "color 0.3s ease",

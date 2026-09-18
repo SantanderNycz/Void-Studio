@@ -215,7 +215,7 @@ export default function Projects() {
           /* Every tab stays visible so the reader can jump back to any project,
              so the whole pile (${projects.length - 1} tabs) has to fit above the active card.
              The tab therefore scales hard with viewport height. */
-          --tab-h: clamp(34px, 5vh, 56px);
+          --tab-h: clamp(42px, 5.6vh, 66px);
           --stack-n: ${projects.length};
           /* The navbar is fixed and always visible, so the stack pins below it
              instead of at top:0 — otherwise the first tab slides under it. */
@@ -224,12 +224,6 @@ export default function Projects() {
           /* Thumbnail aspect ratio (5:3). The card body matches it exactly so
              the whole image is shown with no cropping. */
           --img-ar: 5 / 3;
-          /* Height left for one open card's body once every tab is pinned and
-             the active card's own tab is accounted for. The card width is then
-             derived from this so the full-image body fits without overflowing. */
-          --fit-h: calc(
-            100svh - var(--stack-offset) - var(--stack-n) * var(--tab-h) - 2rem
-          );
         }
 
         .stack-card {
@@ -239,11 +233,10 @@ export default function Projects() {
           overflow: hidden;
           border-radius: 4px;
           height: auto;
-          /* Card shaped to the thumbnail and centred. Width is derived from the
-             height budget so tab + full-image body + every pinned tab all fit;
-             capped so it never gets oversized on large monitors. */
-          width: min(100%, calc(var(--fit-h) * 5 / 3), 1000px);
-          margin-inline: auto;
+          /* Fills the section content width, left-aligned with the rest of the
+             site. The body keeps the thumbnail's 5:3 ratio, so the card is as
+             tall as needed to show the whole image — no cropping. */
+          width: 100%;
           box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.55);
         }
 
@@ -271,7 +264,7 @@ export default function Projects() {
           font-family: "Syne", sans-serif;
           font-weight: 800;
           /* Scales with viewport *height* so it stays proportional to the tab */
-          font-size: clamp(0.95rem, 2.1vh, 1.6rem);
+          font-size: clamp(1.15rem, 2.7vh, 2.2rem);
           letter-spacing: -0.02em;
           color: #241a0a;
           white-space: nowrap;
@@ -365,7 +358,7 @@ export default function Projects() {
 
         /* ── Mobile ────────────────────────────────────────────── */
         @media (max-width: 767px) {
-          .stack { --tab-h: clamp(32px, 4.6vh, 46px); }
+          .stack { --tab-h: clamp(40px, 5.2vh, 54px); }
           .stack-cat, .stack-year { display: none; }
           .stack-desc {
             font-size: 0.82rem;
