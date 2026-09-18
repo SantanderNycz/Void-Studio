@@ -82,20 +82,10 @@ function ProjectCard({
         <span className="stack-year">{project.year}</span>
       </header>
 
-      {/* Body — revealed while this card is the active one */}
+      {/* Body — revealed while this card is the active one.
+          Split: text panel | full thumbnail. */}
       <div className="stack-body">
-        {project.image && (
-          <img
-            className="stack-img"
-            src={project.image}
-            alt={`${project.name} - ${project.category}, ${project.year}`}
-            loading={index === 0 ? "eager" : "lazy"}
-            decoding="async"
-          />
-        )}
-        <div className="stack-scrim" />
-
-        <div className="stack-meta">
+        <div className="stack-info">
           <p className="stack-desc">{description}</p>
           <a
             href={project.url ?? "#"}
@@ -109,6 +99,18 @@ function ProjectCard({
               style={{ background: accentColor }}
             />
           </a>
+        </div>
+
+        <div className="stack-media">
+          {project.image && (
+            <img
+              className="stack-img"
+              src={project.image}
+              alt={`${project.name} - ${project.category}, ${project.year}`}
+              loading={index === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          )}
         </div>
       </div>
     </article>
@@ -221,9 +223,15 @@ export default function Projects() {
              instead of at top:0 — otherwise the first tab slides under it. */
           --nav-h: 74px;
           --stack-offset: calc(var(--nav-h) + 0.5rem);
-          /* Thumbnail aspect ratio (5:3). The card body matches it exactly so
+          /* Thumbnail aspect ratio (5:3). The media box matches it exactly so
              the whole image is shown with no cropping. */
           --img-ar: 5 / 3;
+          /* Height the thumbnail may take once every tab is pinned. Because the
+             image sits in a column (not full width) its width follows from this,
+             so the whole card stays short enough to never be clipped. */
+          --media-h: calc(
+            100svh - var(--stack-offset) - var(--stack-n) * var(--tab-h) - 7rem
+          );
         }
 
         .stack-card {
@@ -282,59 +290,44 @@ export default function Projects() {
         }
         .stack-year { color: rgba(40, 27, 8, 0.42); }
 
-        /* ── Body ──────────────────────────────────────────────── */
+        /* ── Body: text panel | full thumbnail ─────────────────── */
         .stack-body {
-          position: relative;
           flex: none;
-          width: 100%;
-          /* Same ratio as the thumbnail → the image fills it with no crop */
+          display: grid;
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          gap: clamp(1.2rem, 3vw, 3rem);
+          padding: clamp(1.3rem, 2.6vw, 2.2rem);
+        }
+        .stack-info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: clamp(1rem, 2vw, 1.6rem);
+          min-width: 0;
+        }
+        .stack-media {
+          /* Sized by height so the image is always fully visible and the card
+             stays short; width follows from the 5:3 ratio. */
+          height: clamp(190px, var(--media-h), 460px);
           aspect-ratio: var(--img-ar);
+          overflow: hidden;
+          border-radius: 4px;
+          flex-shrink: 0;
         }
         .stack-img {
-          position: absolute;
-          inset: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
           object-position: center;
           display: block;
         }
-        .stack-scrim {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to top,
-            rgba(10, 10, 10, 0.45) 0%,
-            rgba(10, 10, 10, 0.14) 42%,
-            rgba(10, 10, 10, 0) 72%
-          );
-        }
-        .stack-meta {
-          position: absolute;
-          left: clamp(1rem, 2.5vw, 2rem);
-          bottom: clamp(1rem, 2.5vw, 1.8rem);
-          /* Hugs its text instead of spanning the card, so the thumbnail
-             stays as exposed as possible. */
-          width: fit-content;
-          max-width: calc(100% - 2 * clamp(1rem, 2.5vw, 2rem));
-          display: flex;
-          flex-direction: column;
-          gap: clamp(0.8rem, 1.5vw, 1.2rem);
-          align-items: flex-start;
-          /* Barely-there tint — the blur does the legibility work, not opacity. */
-          padding: clamp(0.9rem, 1.8vw, 1.3rem) clamp(1rem, 2vw, 1.5rem);
-          border-radius: 10px;
-          background: rgba(12, 12, 12, 0.2);
-          -webkit-backdrop-filter: blur(22px) saturate(115%);
-          backdrop-filter: blur(22px) saturate(115%);
-          border: 1px solid rgba(245, 240, 232, 0.06);
-        }
         .stack-desc {
           font-family: "Inter", sans-serif;
-          font-size: clamp(0.85rem, 1.1vw, 0.95rem);
-          color: #c4c4c4;
-          line-height: 1.6;
-          max-width: 46ch;
+          font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+          color: #b9b3aa;
+          line-height: 1.7;
+          max-width: 48ch;
         }
 
         .project-link {
@@ -360,9 +353,19 @@ export default function Projects() {
         @media (max-width: 767px) {
           .stack { --tab-h: clamp(40px, 5.2vh, 54px); }
           .stack-cat, .stack-year { display: none; }
+          /* Single column: thumbnail on top, text below */
+          .stack-body {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          .stack-media {
+            order: -1;
+            height: auto;
+            width: 100%;
+          }
           .stack-desc {
-            font-size: 0.82rem;
-            -webkit-line-clamp: 3;
+            font-size: 0.86rem;
+            -webkit-line-clamp: 4;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             overflow: hidden;
