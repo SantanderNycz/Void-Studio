@@ -9,7 +9,7 @@ export const studio = {
   name: "VOID",
   tagline: "Fill the void.",
   location: "Porto, Portugal",
-  email: "santandernycz.ls@gmail.com",
+  email: "contato@voidstudio.pt",
   phone: "+351 915 619 867",
   social: {
     instagram: "https://instagram.com/v0id_studi0",

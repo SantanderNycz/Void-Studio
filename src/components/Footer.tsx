@@ -9,7 +9,7 @@ import { useLanguage } from '../LanguageContext'
 // 1. Create a free account at https://www.emailjs.com
 // 2. Add a Gmail service → copy the Service ID below
 // 3. Create an email template with variables {{from_name}}, {{from_email}}, {{message}}
-//    and set "To Email" to santandernycz.ls@gmail.com → copy the Template ID below
+//    and set "To Email" to contato@voidstudio.pt → copy the Template ID below
 // 4. Go to Account → API Keys → copy your Public Key below
 const EMAILJS_SERVICE_ID  = 'service_2gf65lu'
 const EMAILJS_TEMPLATE_ID = 'template_i5f1rdw'
