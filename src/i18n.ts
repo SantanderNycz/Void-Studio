@@ -34,7 +34,7 @@ export const translations = {
         },
         {
           description:
-            "Presença digital para uma advogada previdenciária, com atendimento humano e foco em cada história.",
+            "Presença digital para uma advogada previdenciária, com atendimento izado e foco em cada detalhe.",
         },
         {
           description:

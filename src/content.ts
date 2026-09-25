@@ -43,7 +43,7 @@ export const projects = [
     name: "Bárbara Santander",
     category: "Landing Page",
     description:
-      "Presença digital para uma advogada previdenciária, com atendimento humano e foco em cada história.",
+      "Presença digital para uma advogada previdenciária, com atendimento humanizado e foco em cada detalhe.",
     year: "2026",
     url: "https://barbara-santander.vercel.app/",
     image: "/projects/barbara.png",
