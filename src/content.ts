@@ -159,7 +159,7 @@ export const services = [
 
 export const about = {
   text: "Somos um estúdio digital de Porto. Construímos com intenção. Cada detalhe tem peso, cada interacção tem propósito.",
-  subtext: "Fundado em 2021.",
+  subtext: "Fundado em 2025.",
 };
 
 export const nav = [
