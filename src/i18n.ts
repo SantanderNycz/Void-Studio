@@ -25,7 +25,7 @@ export const translations = {
     // Projects section
     projects: {
       heading: "Projetos",
-      label: "Trabalho selecionado",
+      label: "Trabalhos selecionado",
       cta: "Ver Projecto",
       items: [
         {
@@ -188,7 +188,7 @@ export const translations = {
 
     projects: {
       heading: "Projects",
-      label: "Selected work",
+      label: "Selected works",
       cta: "View Project",
       items: [
         {

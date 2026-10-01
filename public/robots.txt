@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+# Block nothing — single-page marketing site, everything is indexable.
+
 Sitemap: https://voidstudio.pt/sitemap.xml
