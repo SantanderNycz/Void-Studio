@@ -148,7 +148,7 @@ export default function Projects() {
       </div>
 
       <div ref={listRef} className="pr-list" onMouseMove={onListMove} onMouseLeave={hidePreview}>
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <a
             key={project.id}
             className="pr-row"
@@ -170,7 +170,12 @@ export default function Projects() {
             onBlur={hidePreview}
           >
             <span className="pr-num">{project.id}</span>
-            <span className="pr-name">{project.name}</span>
+            <span className="pr-body">
+              <span className="pr-name">{project.name}</span>
+              {t.projects.items[i]?.description && (
+                <span className="pr-desc">{t.projects.items[i].description}</span>
+              )}
+            </span>
             <span className="pr-meta">
               <span className="pr-cat">{project.category}</span>
               <span className="pr-year">{project.year}</span>
@@ -223,6 +228,22 @@ export default function Projects() {
           letter-spacing: 0.08em;
           color: ${GOLD};
         }
+        .pr-body {
+          display: flex; flex-direction: column; gap: 0.5rem; min-width: 0;
+          transition: transform 0.25s ease-out; transform-origin: left center;
+        }
+        .pr-row:hover .pr-body,
+        .pr-row:focus-visible .pr-body { transform: translateX(10px); }
+        .pr-desc {
+          font-family: "Onest", sans-serif;
+          font-size: clamp(0.78rem, 1.1vw, 0.9rem);
+          line-height: 1.5;
+          color: #7a7a7a;
+          max-width: 46ch;
+          transition: color 0.25s ease-out;
+        }
+        .pr-row:hover .pr-desc,
+        .pr-row:focus-visible .pr-desc { color: #a8a8a8; }
         .pr-name {
           font-family: "Syne", sans-serif;
           font-weight: 800;
@@ -244,7 +265,7 @@ export default function Projects() {
         .pr-list:hover .pr-row:not(:hover),
         .pr-list:focus-within .pr-row:not(:focus-visible) { opacity: 0.38; }
         .pr-row:hover .pr-name,
-        .pr-row:focus-visible .pr-name { transform: translateX(10px); color: #ffffff; }
+        .pr-row:focus-visible .pr-name { color: #ffffff; }
         .pr-row:focus-visible { outline: 1px solid ${GOLD}; outline-offset: 6px; border-radius: 2px; }
 
         /* floating preview panel */
@@ -286,12 +307,12 @@ export default function Projects() {
           .pr-thumb { display: block; }
           .pr-preview { display: none; }
           .pr-list:hover .pr-row:not(:hover) { opacity: 1; }
-          .pr-row:hover .pr-name { transform: none; }
+          .pr-row:hover .pr-body { transform: none; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .pr-row, .pr-name, .pr-preview { transition: opacity 0.2s ease-out; }
-          .pr-row:hover .pr-name, .pr-row:focus-visible .pr-name { transform: none; }
+          .pr-row, .pr-name, .pr-body, .pr-preview { transition: opacity 0.2s ease-out; }
+          .pr-row:hover .pr-body, .pr-row:focus-visible .pr-body { transform: none; }
           .pr-preview, .pr-preview.is-on { transform: translate(-50%, -50%); }
         }
       `}</style>

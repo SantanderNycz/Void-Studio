@@ -109,7 +109,7 @@ export const translations = {
         {
           number: "01",
           name: "Landing Page",
-          price: "200€",
+          price: "300€",
           from: "a partir de",
           features: [
             "1 página com scroll único ou secções essenciais",
@@ -121,7 +121,7 @@ export const translations = {
         {
           number: "02",
           name: "Site Institucional",
-          price: "350€",
+          price: "450€",
           from: "a partir de",
           features: [
             "Tudo do pacote anterior",
@@ -268,7 +268,7 @@ export const translations = {
         {
           number: "01",
           name: "Landing Page",
-          price: "200€",
+          price: "300€",
           from: "starting from",
           features: [
             "Single-scroll page with essential sections",
@@ -280,7 +280,7 @@ export const translations = {
         {
           number: "02",
           name: "Institutional Site",
-          price: "350€",
+          price: "450€",
           from: "starting from",
           features: [
             "Everything in the previous package",
