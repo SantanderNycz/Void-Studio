@@ -34,7 +34,7 @@ export const projects = [
     description:
       "Academia de estética especializada em lash lifting e design de sobrancelhas.",
     year: "2026",
-    url: "https://fernandagarciaacademy.com/",
+    url: "https://fernanda-garcia-academy.vercel.app/",
     image: "/projects/fernanda-garcia.png",
     accentColor: "#8B6E45",
   },

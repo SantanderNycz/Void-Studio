@@ -271,7 +271,7 @@ export default function Projects() {
         /* floating preview panel */
         .pr-preview {
           position: fixed; top: 0; left: 0; z-index: 50;
-          width: min(42vw, 440px);
+          width: min(67vw, 704px);
           pointer-events: none; opacity: 0; visibility: hidden;
           transform: translate(-50%, -50%) scale(0.96);
           transition: opacity 0.22s ease-out, transform 0.22s ease-out;

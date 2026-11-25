@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/Projects.tsx"
+        ],
+        "createdAt": "2026-11-25T22:09:07.677Z",
+        "reason": "intentional: panel <img> src is set dynamically on hover/focus by showPreview()"
+      }
+    ]
+  }
+}
